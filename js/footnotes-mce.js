@@ -25,10 +25,10 @@
                 editor.focus();
                 var content = editor.selection.getContent();
                 if (content.length > 0) {
-                    if (content.indexOf(fme_gut.open) == -1 && content.indexOf(fme_gut.close) == -1) {
-                        editor.selection.setContent(fme_gut.open + content + fme_gut.close);
-                    } else if (content.indexOf(fme_gut.open) != -1 && content.indexOf(fme_gut.close) != -1) {
-                        editor.selection.setContent(content.replace(fme_gut.open, '').replace(fme_gut.close, ''));
+                    if (content.indexOf(awefoot_gut.open) == -1 && content.indexOf(awefoot_gut.close) == -1) {
+                        editor.selection.setContent(awefoot_gut.open + content + awefoot_gut.close);
+                    } else if (content.indexOf(awefoot_gut.open) != -1 && content.indexOf(awefoot_gut.close) != -1) {
+                        editor.selection.setContent(content.replace(awefoot_gut.open, '').replace(awefoot_gut.close, ''));
                     } else {
                         //we don't have a full tag in the selection, do nothing
                     }
@@ -41,7 +41,7 @@
                             label: __( 'Foot note', 'awesome-footnotes' ),
                         }],
                         onsubmit: function( e ) {
-                            editor.insertContent( fme_gut.open + e.data.footnote + fme_gut.close);
+                            editor.insertContent( awefoot_gut.open + e.data.footnote + awefoot_gut.close);
                         }
                     });
                 }

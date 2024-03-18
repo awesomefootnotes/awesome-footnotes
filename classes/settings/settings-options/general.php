@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * General settings of the plugin
  *
@@ -7,8 +8,8 @@
  * @since 2.0.0
  */
 
-use FME\Helpers\Settings;
-use FME\Controllers\Footnotes_Formatter;
+use AWEFOOT\Helpers\Settings;
+use AWEFOOT\Controllers\Footnotes_Formatter;
 
 	Settings::build_option(
 		array(

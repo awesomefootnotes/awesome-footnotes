@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'FME\\' => array($baseDir . '/classes'),
+    'AWEFOOT\\' => array($baseDir . '/classes'),
 );

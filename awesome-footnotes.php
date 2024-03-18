@@ -7,7 +7,7 @@
  * @package   footnotes
  * @author    quotecites
  * @copyright Copyright (C) 2023-%%YEAR%%, Footnotes
- * @license   GPL v3
+ * @license   GPLv3
  * @link      https://wordpress.org/plugins/awesome-footnotes/
  *
  * Plugin Name:     Awesome Footnotes
@@ -16,31 +16,31 @@
  * Author:          Footnotes
  * Author URI:      https://quotecites.com
  * Text Domain:     awesome-footnotes
- * License:         GPL v3
+ * License:         GPLv3
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.txt
  * Requires PHP:    7.4
  */
 
-use FME\Helpers\Context_Helper;
+use AWEFOOT\Helpers\Context_Helper;
 
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'We\'re sorry, but you can not directly access this file.' );
 }
 
-define( 'FME_VERSION', '1.0.0' );
-define( 'FME_TEXTDOMAIN', 'awesome-footnotes' );
-define( 'FME_NAME', 'Awesome Footnotes' );
-define( 'FME_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
-define( 'FME_PLUGIN_ROOT_URL', plugin_dir_url( __FILE__ ) );
-define( 'FME_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-define( 'FME_PLUGIN_ABSOLUTE', __FILE__ );
-define( 'FME_MIN_PHP_VERSION', '7.4' );
-define( 'FME_WP_VERSION', '6.0' );
-define( 'FME_SETTINGS_NAME', 'fme_footnote_options' );
+define( 'AWEFOOT_VERSION', '1.0.0' );
+define( 'AWEFOOT_TEXTDOMAIN', 'awesome-footnotes' );
+define( 'AWEFOOT_NAME', 'Awesome Footnotes' );
+define( 'AWEFOOT_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
+define( 'AWEFOOT_PLUGIN_ROOT_URL', plugin_dir_url( __FILE__ ) );
+define( 'AWEFOOT_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'AWEFOOT_PLUGIN_ABSOLUTE', __FILE__ );
+define( 'AWEFOOT_MIN_PHP_VERSION', '7.4' );
+define( 'AWEFOOT_WP_VERSION', '6.0' );
+define( 'AWEFOOT_SETTINGS_NAME', 'awefoot_footnote_options' );
 
 
-if ( version_compare( PHP_VERSION, FME_MIN_PHP_VERSION, '<=' ) ) {
+if ( version_compare( PHP_VERSION, AWEFOOT_MIN_PHP_VERSION, '<=' ) ) {
 	add_action(
 		'admin_init',
 		static function () {
@@ -59,8 +59,8 @@ if ( version_compare( PHP_VERSION, FME_MIN_PHP_VERSION, '<=' ) ) {
 							'"%1$s" requires PHP %2$s or newer. Plugin is automatically deactivated.',
 							'awesome-footnotes'
 						),
-						FME_NAME,
-						FME_MIN_PHP_VERSION
+						AWEFOOT_NAME,
+						AWEFOOT_MIN_PHP_VERSION
 					)
 				)
 			);
@@ -100,9 +100,9 @@ if ( ! extension_loaded( 'mbstring' ) ) {
 	return;
 }
 
-$plugin_name_libraries = require FME_PLUGIN_ROOT . 'vendor/autoload.php';
+$plugin_name_libraries = require AWEFOOT_PLUGIN_ROOT . 'vendor/autoload.php';
 
 if ( ! Context_Helper::is_installing() ) {
-	\register_activation_hook( FME_PLUGIN_ABSOLUTE, array( '\FME\Awesome_Footnotes', 'plugin_activate' ) );
-	\add_action( 'plugins_loaded', array( '\FME\Awesome_Footnotes', 'init' ) );
+	\register_activation_hook( AWEFOOT_PLUGIN_ABSOLUTE, array( '\AWEFOOT\Awesome_Footnotes', 'plugin_activate' ) );
+	\add_action( 'plugins_loaded', array( '\AWEFOOT\Awesome_Footnotes', 'init' ) );
 }

@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace FME\Controllers;
+namespace AWEFOOT\Controllers;
 
-use FME\Helpers\Settings;
+use AWEFOOT\Helpers\Settings;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\FME\Controllers\Footnotes_Formatter' ) ) {
+if ( ! class_exists( '\AWEFOOT\Controllers\Footnotes_Formatter' ) ) {
 	/**
 	 * Responsible for proper context determination.
 	 *
@@ -28,9 +28,9 @@ if ( ! class_exists( '\FME\Controllers\Footnotes_Formatter' ) ) {
 
 		public const TEXT_MARKER_PREFIX = '#########';
 
-		public const SHORT_CODE_POSITION_HOLDER = '########FME########';
+		public const SHORT_CODE_POSITION_HOLDER = '########AWEFOOT########';
 
-		public const SHORTCODE_NAME = 'fme_show_footnotes';
+		public const SHORTCODE_NAME = 'awefoot_show_footnotes';
 
 		/**
 		 * Array with the styles
@@ -67,7 +67,7 @@ if ( ! class_exists( '\FME\Controllers\Footnotes_Formatter' ) ) {
 		 */
 		public static function init() {
 
-			\add_filter( 'fme_process_content_hooks', array( __CLASS__, 'acf_footnotes' ) );
+			\add_filter( 'awefoot_process_content_hooks', array( __CLASS__, 'acf_footnotes' ) );
 
 			/**
 			 * Apply the content filters - parses the content and adds the extracted footnotes
@@ -76,7 +76,7 @@ if ( ! class_exists( '\FME\Controllers\Footnotes_Formatter' ) ) {
 			 *
 			 * @since 2.4.1
 			 */
-			$process_hooks = \apply_filters( 'fme_process_content_hooks', array( 'the_content' ) );
+			$process_hooks = \apply_filters( 'awefoot_process_content_hooks', array( 'the_content' ) );
 			array_map(
 				function ( $hook ) {
 					\add_action( $hook, array( __CLASS__, 'process' ), Settings::get_current_options()['priority'] );
@@ -183,7 +183,7 @@ if ( ! class_exists( '\FME\Controllers\Footnotes_Formatter' ) ) {
 
 			wp_register_script(
 				'wp-footnotes-tooltips',
-				FME_PLUGIN_ROOT_URL . 'js/tooltips.min.js',
+				AWEFOOT_PLUGIN_ROOT_URL . 'js/tooltips.min.js',
 				array(
 					'jquery',
 					'jquery-ui-widget',
@@ -191,15 +191,15 @@ if ( ! class_exists( '\FME\Controllers\Footnotes_Formatter' ) ) {
 					'jquery-ui-core',
 					'jquery-ui-position',
 				),
-				FME_VERSION,
+				AWEFOOT_VERSION,
 				true
 			);
 
 			wp_register_style(
 				'wp-footnotes-tt-style',
-				FME_PLUGIN_ROOT_URL . 'css/tooltips.min.css',
+				AWEFOOT_PLUGIN_ROOT_URL . 'css/tooltips.min.css',
 				array(),
-				FME_VERSION
+				AWEFOOT_VERSION
 			);
 		}
 
@@ -491,7 +491,7 @@ if ( ! class_exists( '\FME\Controllers\Footnotes_Formatter' ) ) {
 			 *
 			 * @since 2.4.0
 			 */
-			$footnotes_markup .= \apply_filters( 'fme_footnotes_header', $footnotes_header );
+			$footnotes_markup .= \apply_filters( 'awefoot_footnotes_header', $footnotes_header );
 
 			$footnotes_markup = $footnotes_markup . '<ol ' . $start . 'class="footnotes">';
 			foreach ( $footnotes as $key => $value ) {
@@ -543,7 +543,7 @@ if ( ! class_exists( '\FME\Controllers\Footnotes_Formatter' ) ) {
 			 *
 			 * @since 2.4.0
 			 */
-			$footnotes_markup .= \apply_filters( 'fme_footnotes_footer', $footnotes_footer );
+			$footnotes_markup .= \apply_filters( 'awefoot_footnotes_footer', $footnotes_footer );
 
 			return $footnotes_markup;
 		}

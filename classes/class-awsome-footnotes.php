@@ -12,17 +12,17 @@
 
 declare(strict_types=1);
 
-namespace FME;
+namespace AWEFOOT;
 
-use FME\Migration\Migration;
-use FME\Helpers\Settings;
-use FME\Helpers\Review_Plugin;
-use FME\Controllers\Integrations;
-use FME\Controllers\Footnotes_Formatter;
-use FME\Controllers\Pointers;
-use FME\Helpers\Context_Helper;
+use AWEFOOT\Migration\Migration;
+use AWEFOOT\Helpers\Settings;
+use AWEFOOT\Helpers\Review_Plugin;
+use AWEFOOT\Controllers\Integrations;
+use AWEFOOT\Controllers\Footnotes_Formatter;
+use AWEFOOT\Controllers\Pointers;
+use AWEFOOT\Helpers\Context_Helper;
 
-if ( ! class_exists( '\FME\Awesome_Footnotes' ) ) {
+if ( ! class_exists( '\AWEFOOT\Awesome_Footnotes' ) ) {
 
 	/**
 	 * Main plugin class
@@ -31,7 +31,7 @@ if ( ! class_exists( '\FME\Awesome_Footnotes' ) ) {
 	 */
 	class Awesome_Footnotes {
 
-		public const REDIRECT_OPTION_NAME = 'fme_plugin_do_activation_redirect';
+		public const REDIRECT_OPTION_NAME = 'awefoot_plugin_do_activation_redirect';
 
 		/**
 		 * Inits the class and hooks
@@ -44,7 +44,7 @@ if ( ! class_exists( '\FME\Awesome_Footnotes' ) ) {
 
 				\add_action( 'admin_init', array( __CLASS__, 'plugin_redirect' ) );
 
-				\add_action( 'current_screen', array( '\FME\Helpers\Upgrade_Notice', 'init' ) );
+				\add_action( 'current_screen', array( '\AWEFOOT\Helpers\Upgrade_Notice', 'init' ) );
 
 				\add_filter( 'plugin_action_links', array( __CLASS__, 'add_settings_link' ), 10, 2 );
 				\add_filter( 'plugin_row_meta', array( __CLASS__, 'plugin_meta' ), 10, 2 );
@@ -76,7 +76,7 @@ if ( ! class_exists( '\FME\Awesome_Footnotes' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function add_settings_link( $links, $file ) {
-			if ( FME_PLUGIN_BASENAME === $file ) {
+			if ( AWEFOOT_PLUGIN_BASENAME === $file ) {
 				$settings_link = '<a href="' . Settings::get_settings_page_link() . '">' . __( 'Settings', 'awesome-footnotes' ) . '</a>';
 				array_unshift( $links, $settings_link );
 			}
@@ -155,11 +155,11 @@ if ( ! class_exists( '\FME\Awesome_Footnotes' ) ) {
 						is_array( $arr['function'] ) &&
 						isset( $arr['function'][0] ) &&
 						is_object( $arr['function'][0] ) &&
-						false !== strpos( ( get_class( $arr['function'][0] ) ), 'FME' )
+						false !== strpos( ( get_class( $arr['function'][0] ) ), 'AWEFOOT' )
 					) ||
 					( // Cover class static method callback case.
 						! empty( $name ) &&
-						false !== strpos( ( $name ), 'FME' )
+						false !== strpos( ( $name ), 'AWEFOOT' )
 					)
 					) {
 						continue;
@@ -184,7 +184,7 @@ if ( ! class_exists( '\FME\Awesome_Footnotes' ) ) {
 				printf(
 					/* Translators: Plugin link. */
 					esc_html__( 'Proudly powered by %s', 'awesome-footnotes' ),
-					'<a href="' . esc_url( __( 'https://wordpress.org/plugins/awesome-footnotes/', 'awesome-footnotes' ) ) . '" rel="nofollow">' . \esc_attr( FME_NAME ) . '</a>'
+					'<a href="' . esc_url( __( 'https://wordpress.org/plugins/awesome-footnotes/', 'awesome-footnotes' ) ) . '" rel="nofollow">' . \esc_attr( AWEFOOT_NAME ) . '</a>'
 				);
 				?>
 				-->

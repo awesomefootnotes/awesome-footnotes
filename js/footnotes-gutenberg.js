@@ -23,11 +23,11 @@
             onClick: function () {
                 let updatedText = '';
                 let content = window.wp.richText.getTextContent(window.wp.richText.slice(props.value));
-                if (content.indexOf(fme_gut.open) == -1 && content.indexOf(fme_gut.close) == -1) {
-                    updatedText = wp.richText.insert(props.value, fme_gut.open + content + fme_gut.close);
-                } else if (content.indexOf(fme_gut.open) != -1 && content.indexOf(fme_gut.close) != -1) {
-                    updatedText = wp.richText.insert(props.value, content.replace(fme_gut.open, '').replace(fme_gut.close, ''));
-                    //editor.selection.setContent(content.replace(fme_gut.open, '').replace(fme_gut.close, ''));
+                if (content.indexOf(awefoot_gut.open) == -1 && content.indexOf(awefoot_gut.close) == -1) {
+                    updatedText = wp.richText.insert(props.value, awefoot_gut.open + content + awefoot_gut.close);
+                } else if (content.indexOf(awefoot_gut.open) != -1 && content.indexOf(awefoot_gut.close) != -1) {
+                    updatedText = wp.richText.insert(props.value, content.replace(awefoot_gut.open, '').replace(awefoot_gut.close, ''));
+                    //editor.selection.setContent(content.replace(awefoot_gut.open, '').replace(awefoot_gut.close, ''));
                 }
 
                 props.onChange(updatedText);

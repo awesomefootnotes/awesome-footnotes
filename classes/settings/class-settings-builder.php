@@ -13,7 +13,7 @@
 
 declare(strict_types=1);
 
-namespace FME\Settings;
+namespace AWEFOOT\Settings;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Upgrade notice class
  */
-if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
+if ( ! class_exists( '\AWEFOOT\Settings\Settings_Builder' ) ) {
 	/**
 	 * Utility class for showing the upgrade notice in the plugins page.
 	 *
@@ -307,7 +307,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 			if ( ! empty( self::$settings['hint'] ) ) {
 				?>
 				<span class="extra-text">
-				<?php echo self::$settings['hint']; ?>
+				<?php echo esc_attr( self::$settings['hint'] ); ?>
 				</span>
 				<?php
 			}
@@ -326,16 +326,16 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 			?>
 
 			<div class="image-preview-wrapper">
-				<input <?php echo self::$item_id_attr; ?> <?php echo self::$name_attr; ?> class="fme-img-path" type="text"
-					value="<?php echo esc_attr( self::$current_value ); ?>" <?php echo self::$placeholder_attr; ?>>
-				<input id="<?php echo 'upload_' . self::$item_id . '_button'; ?>" type="button" class="fme-upload-img button"
-					value="<?php echo $upload_button; ?>">
+				<input <?php echo esc_attr( self::$item_id_attr ); ?> <?php echo esc_attr( self::$name_attr ); ?> class="fme-img-path" type="text"
+					value="<?php echo esc_attr( self::$current_value ); ?>" <?php echo esc_attr( self::$placeholder_attr ); ?>>
+				<input id="<?php echo esc_attr( 'upload_' . self::$item_id . '_button' ); ?>" type="button" class="fme-upload-img button"
+					value="<?php echo esc_attr( $upload_button ); ?>">
 
 						<?php self::hint(); ?>
 			</div>
 
-			<div id="<?php echo self::$item_id . '-preview'; ?>" class="img-preview" <?php echo $hide_preview; ?>>
-				<img src="<?php echo $image_preview; ?>" alt="">
+			<div id="<?php echo esc_attr( self::$item_id . '-preview' ); ?>" class="img-preview" <?php echo esc_attr( $hide_preview ); ?>>
+				<img src="<?php echo esc_attr( $image_preview ); ?>" alt="">
 				<a class="del-img"></a>
 			</div>
 			<div class="clear"></div>
@@ -353,10 +353,10 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 			?>
 
 			<div class="image-preview-wrapper">
-				<input <?php echo self::$item_id_attr; ?> <?php echo self::$name_attr; ?> class="fme-font-path" type="text"
-					value="<?php echo esc_attr( self::$current_value ); ?>" <?php echo self::$placeholder_attr; ?>>
-				<input id="<?php echo 'upload_' . self::$item_id . '_button'; ?>" type="button" class="fme-upload-font button"
-					value="<?php echo $upload_button; ?>">
+				<input <?php echo esc_attr( self::$item_id_attr ); ?> <?php echo esc_attr( self::$name_attr ); ?> class="fme-font-path" type="text"
+					value="<?php echo esc_attr( self::$current_value ); ?>" <?php echo esc_attr( self::$placeholder_attr ); ?>>
+				<input id="<?php echo esc_attr( 'upload_' . self::$item_id . '_button' ); ?>" type="button" class="fme-upload-font button"
+					value="<?php echo esc_attr( $upload_button ); ?>">
 
 						<?php self::hint(); ?>
 			</div>
@@ -370,7 +370,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 		 */
 		private static function text() {
 			?>
-			<input <?php echo self::$item_id_attr; ?> <?php echo self::$name_attr; ?> type="text"	value="<?php echo esc_attr( self::$current_value ); ?>" <?php echo self::$placeholder_attr; ?>>
+			<input <?php echo esc_attr( self::$item_id_attr ); ?> <?php echo esc_attr( self::$name_attr ); ?> type="text"	value="<?php echo esc_attr( self::$current_value ); ?>" <?php echo esc_attr( self::$placeholder_attr ); ?>>
 			<?php
 		}
 
@@ -386,8 +386,8 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 			$current_value = ! empty( self::$current_value[ $key ] ) ? self::$current_value[ $key ] : '';
 
 			?>
-			<input name="<?php echo $single_name; ?>" type="text" value="<?php echo $current_value; ?>"
-			<?php echo self::$placeholder_attr; ?>>
+			<input name="<?php echo esc_attr( $single_name ); ?>" type="text" value="<?php echo esc_attr( $current_value ); ?>"
+			<?php echo esc_attr( self::$placeholder_attr ); ?>>
 			<?php
 		}
 
@@ -404,9 +404,9 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 			$toggle_class = ! empty( self::$settings['toggle'] ) ? 'fme-toggle-option' : '';
 
 			?>
-				<input <?php echo self::$item_id_attr; ?> <?php echo self::$name_attr; ?>
-					class="fme-js-switch <?php echo $toggle_class; ?>" <?php echo $toggle_data; ?> type="checkbox" value="true"
-							<?php echo $checked; ?>>
+				<input <?php echo esc_attr( self::$item_id_attr ); ?> <?php echo esc_attr( self::$name_attr ); ?>
+					class="fme-js-switch <?php echo esc_attr( $toggle_class ); ?>" <?php echo esc_attr( $toggle_data ); ?> type="checkbox" value="true"
+							<?php echo esc_attr( $checked ); ?>>
 							<?php
 		}
 
@@ -431,8 +431,8 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 
 				?>
 								<label>
-									<input <?php echo self::$name_attr; ?> <?php echo $checked; ?> type="radio" value="<?php echo $option_key; ?>">
-							<?php echo $option; ?>
+									<input <?php echo esc_attr( self::$name_attr ); ?> <?php echo esc_attr( $checked ); ?> type="radio" value="<?php echo esc_attr( $option_key ); ?>">
+							<?php echo esc_attr( $option ); ?>
 								</label>
 								<?php
 			}
@@ -493,7 +493,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 		 */
 		private static function multiple_select() {
 			?>
-				<select name="<?php echo self::$option_name . '[]'; ?>" <?php echo self::$item_id_attr; ?> multiple="multiple">
+				<select name="<?php echo esc_attr( self::$option_name . '[]' ); ?>" <?php echo esc_attr( self::$item_id_attr ); ?> multiple="multiple">
 
 							<?php
 
@@ -507,7 +507,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 								}
 
 								?>
-					<option value="<?php echo $option_key; ?>" <?php echo $selected; ?>><?php echo $option; ?></option>
+					<option value="<?php echo esc_attr( $option_key ); ?>" <?php echo esc_attr( $selected ); ?>><?php echo esc_attr( $option ); ?></option>
 								<?php
 							}
 							?>
@@ -522,7 +522,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 		 */
 		private static function textarea() {
 			?>
-			<textarea <?php echo self::$item_id_attr; ?> <?php echo self::$name_attr; ?>
+			<textarea <?php echo esc_attr( self::$item_id_attr ); ?> <?php echo esc_attr( self::$name_attr ); ?>
 				rows="3"><?php echo esc_textarea( self::$current_value ); ?></textarea>
 			<?php
 		}
@@ -539,8 +539,8 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 			?>
 
 			<div class="fme-custom-color-picker">
-				<input class="<?php echo $custom_class; ?>" <?php echo self::$item_id_attr; ?> <?php echo self::$name_attr; ?>
-					type="text" value="<?php echo self::$current_value; ?>"
+				<input class="<?php echo esc_attr( $custom_class ); ?>" <?php echo esc_attr( self::$item_id_attr ); ?> <?php echo esc_attr( self::$name_attr ); ?>
+					type="text" value="<?php echo esc_attr( self::$current_value ); ?>"
 					data-palette="#000000, #9b59b6, #3498db, #2ecc71, #f1c40f, #34495e, #e74c3c"
 					style="width:80px;">
 			</div>
@@ -556,7 +556,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 			?>
 			<div class="fme-custom-posts-selector">
 				<div style="width:99%;max-width:25em; float:left;">
-					<select name="<?php echo self::$option_name . '[]'; ?>" <?php echo self::$item_id_attr; ?> multiple="multiple"
+					<select name="<?php echo esc_attr( self::$option_name . '[]' ); ?>" <?php echo esc_attr( self::$item_id_attr ); ?> multiple="multiple"
 						style="width:100%">
 						<?php
 						$data = maybe_unserialize( self::$current_value );
@@ -572,7 +572,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 							$posts = $query->posts;
 							foreach ( $posts as $post ) {
 								?>
-						<option value="<?php echo $post->ID; ?>" selected="selected">
+						<option value="<?php echo esc_attr( $post->ID ); ?>" selected="selected">
 								<?php echo esc_html( $post->post_title ); ?>
 						</option>
 								<?php
@@ -594,9 +594,9 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 			?>
 			<div class="fme-custom-post-selector">
 				<input type="text" value="<?php echo esc_attr( get_the_title( self::$current_value ) ); ?>"
-						<?php echo self::$placeholder_attr; ?>>
-				<input <?php echo self::$item_id_attr; ?> <?php echo self::$name_attr; ?> type="hidden"
-					value="<?php echo esc_attr( self::$current_value ); ?>" <?php echo self::$placeholder_attr; ?>>
+						<?php echo esc_attr( self::$placeholder_attr ); ?>>
+				<input <?php echo esc_attr( self::$item_id_attr ); ?> <?php echo esc_attr( self::$name_attr ); ?> type="hidden"
+					value="<?php echo esc_attr( self::$current_value ); ?>" <?php echo esc_attr( self::$placeholder_attr ); ?>>
 			</div>
 			<?php
 		}
@@ -631,7 +631,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 		 */
 		private static function fonts() {
 			?>
-			<input <?php echo self::$name_attr; ?> <?php echo self::$item_id_attr; ?> class="fme-select-font" type="text" value="<?php echo esc_attr( self::$current_value ); ?>">
+			<input <?php echo esc_attr( self::$name_attr ); ?> <?php echo esc_attr( self::$item_id_attr ); ?> class="fme-select-font" type="text" value="<?php echo esc_attr( self::$current_value ); ?>">
 			<?php
 		}
 
@@ -650,7 +650,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 					?>
 				</h2>
 
-				<?php do_action( 'fme_settings_save_button' ); ?>
+				<?php do_action( 'awefoot_settings_save_button' ); ?>
 
 				<div class="clear"></div>
 			</div>
@@ -673,8 +673,8 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 			}
 
 			?>
-			<p <?php echo self::$item_id_wrap; ?> class="<?php echo self::$custom_class; ?>">
-						<?php echo self::$settings['text']; ?>
+			<p <?php echo esc_attr( self::$item_id_wrap ); ?> class="<?php echo esc_attr( self::$custom_class ); ?>">
+						<?php echo esc_attr( self::$settings['text'] ); ?>
 			</p>
 			<?php
 		}
@@ -686,7 +686,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 		 */
 		private static function hidden() {
 			?>
-			<input <?php echo self::$name_attr; ?> type="hidden" value="<?php echo esc_attr( self::$current_value ); ?>">
+			<input <?php echo esc_attr( self::$name_attr ); ?> type="hidden" value="<?php echo esc_attr( self::$current_value ); ?>">
 			<?php
 		}
 
@@ -697,7 +697,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 		 */
 		private static function number() {
 			?>
-			<input style="width:60px" min="-1000" max="1000000" <?php echo self::$item_id_attr; ?> <?php echo self::$name_attr; ?> type="number" value="<?php echo esc_attr( self::$current_value ); ?>" <?php echo self::$placeholder_attr; ?>>
+			<input style="width:60px" min="-1000" max="1000000" <?php echo esc_attr( self::$item_id_attr ); ?> <?php echo esc_attr( self::$name_attr ); ?> type="number" value="<?php echo esc_attr( self::$current_value ); ?>" <?php echo esc_attr( self::$placeholder_attr ); ?>>
 			<?php
 		}
 
@@ -709,13 +709,13 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 		private static function section_head() {
 			?>
 
-			<h3 <?php echo self::$item_id_attr; ?> class="fme-section-title <?php echo self::$custom_class; ?>">
+			<h3 <?php echo esc_attr( self::$item_id_attr ); ?> class="fme-section-title <?php echo esc_attr( self::$custom_class ); ?>">
 			<?php
 
 			echo self::$settings['title'];
 
 			if ( ! empty( self::$settings['id'] ) ) {
-				\do_action( 'fme_admin_after_head_title', self::$settings['id'] );
+				\do_action( 'awefoot_admin_after_head_title', self::$settings['id'] );
 			}
 			?>
 			</h3>
@@ -731,20 +731,20 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 		private static function option_head() {
 			// Everything is ok with not closed div - dont worry about it.
 			?>
-			<div <?php echo self::$item_id_wrap; ?> class="option-item <?php echo self::$custom_class; ?>">
+			<div <?php echo esc_attr( self::$item_id_wrap ); ?> class="option-item <?php echo esc_attr( self::$custom_class ); ?>">
 
 			<?php
 
 			if ( ! empty( self::$settings['pre_text'] ) ) {
 				?>
-				<div class="fme-option-pre-label"><?php echo self::$settings['pre_text']; ?></div>
+				<div class="fme-option-pre-label"><?php echo esc_attr( self::$settings['pre_text'] ); ?></div>
 				<div class="clear"></div>
 				<?php
 			}
 
 			if ( ! empty( self::$settings['name'] ) ) {
 				?>
-				<span class="fme-label"><?php echo self::$settings['name']; ?></span>
+				<span class="fme-label"><?php echo esc_attr( self::$settings['name'] ); ?></span>
 				<?php
 			}
 		}
@@ -756,7 +756,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 		 */
 		private static function visual() {
 			?>
-			<ul id="fme_<?php echo self::$item_id; ?>" class="fme-options">
+			<ul id="awefoot_<?php echo esc_attr( self::$item_id ); ?>" class="fme-options">
 
 			<?php
 
@@ -773,9 +773,9 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 				}
 
 				?>
-					<li class="visual-option-<?php echo $option_key; ?>">
-						<input <?php echo self::$name_attr; ?> type="radio" value="<?php echo $option_key; ?>"
-						<?php echo $checked; ?>>
+					<li class="visual-option-<?php echo esc_attr( $option_key ); ?>">
+						<input <?php echo esc_attr( self::$name_attr ); ?> type="radio" value="<?php echo esc_attr( $option_key ); ?>"
+						<?php echo esc_attr( $checked ); ?>>
 						<a class="checkbox-select" href="#">
 
 						<?php
@@ -796,24 +796,24 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 										}
 									}
 									?>
-							<img class="<?php echo $key; ?>" <?php echo $data_attr; ?>
-								src="<?php echo $images_path . $img_value; ?>" alt="">
+							<img class="<?php echo esc_attr( $key ); ?>" <?php echo esc_attr( $data_attr ); ?>
+								src="<?php echo esc_attr( $images_path . $img_value ); ?>" alt="">
 										<?php
 								} else {
 									?>
-							<img src="<?php echo $images_path . $img_data; ?>" alt="">
+							<img src="<?php echo esc_attr( $images_path . $img_data ); ?>" alt="">
 										<?php
 								}
 
 								if ( ! empty( $description ) ) {
 									?>
-							<span><?php echo $description; ?></span>
+							<span><?php echo esc_attr( $description ); ?></span>
 										<?php
 								}
 							}
 						} else {
 							?>
-							<img src="<?php echo $images_path . $option; ?>" alt="">
+							<img src="<?php echo esc_attr( $images_path . $option ); ?>" alt="">
 								<?php
 						}
 						?>
@@ -846,7 +846,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 				}
 				?>
 
-				jQuery(document).on('click', '#fme_<?php echo esc_js( self::$item_id ); ?> a', function() {
+				jQuery(document).on('click', '#awefoot_<?php echo esc_js( self::$item_id ); ?> a', function() {
 					selected_val = jQuery(this).parent().find('input').val();
 					jQuery('.<?php echo esc_js( self::$item_id ); ?>-options').hide();
 					<?php
@@ -902,9 +902,9 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 
 				<li id="listItem_<?php echo esc_attr( $counter ); ?>" class="ui-state-default">
 					<div class="gallery-img img-preview">
-							<?php echo wp_get_attachment_image( $slide['id'], 'thumbnail' ); ?>
-						<input id="fme_post_gallery[<?php echo esc_attr( $counter ); ?>][id]"
-							name="fme_post_gallery[<?php echo esc_attr( $counter ); ?>][id]"
+							<?php echo esc_attr( wp_get_attachment_image( $slide['id'], 'thumbnail' ) ); ?>
+						<input id="awefoot_post_gallery[<?php echo esc_attr( $counter ); ?>][id]"
+							name="awefoot_post_gallery[<?php echo esc_attr( $counter ); ?>][id]"
 							value="<?php echo esc_attr( $slide['id'] ); ?>" type="hidden" />
 						<a class="del-img-all"></a>
 					</div>
@@ -927,12 +927,12 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 				});
 
 				// Uploading files
-				var fme_slider_uploader;
+				var awefoot_slider_uploader;
 
 				jQuery(document).on('click', '#<?php echo esc_attr( self::$item_id ); ?>-upload', function(
 					event) {
 					event.preventDefault();
-					fme_slider_uploader = wp.media.frames.fme_slider_uploader = wp.media({
+					awefoot_slider_uploader = wp.media.frames.awefoot_slider_uploader = wp.media({
 						title: '<?php esc_html_e( 'Add Image', 'awesome-footnotes' ); ?>',
 						library: {
 							type: 'image'
@@ -943,8 +943,8 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 						multiple: true,
 					});
 
-					fme_slider_uploader.on('select', function() {
-						var selection = fme_slider_uploader.state().get('selection');
+					awefoot_slider_uploader.on('select', function() {
+						var selection = awefoot_slider_uploader.state().get('selection');
 						selection.map(function(attachment) {
 							attachment = attachment.toJSON();
 							jQuery(
@@ -953,8 +953,8 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 								.append('\
 										<li id="listItem_' + nextImgCell + '" class="ui-state-default">\
 											<div class="gallery-img img-preview">\
-												<img src="' + attachment.url + '" alt=""><input id="fme_post_gallery[' +
-									nextImgCell + '][id]" name="fme_post_gallery[' +
+												<img src="' + attachment.url + '" alt=""><input id="awefoot_post_gallery[' +
+									nextImgCell + '][id]" name="awefoot_post_gallery[' +
 									nextImgCell + '][id]" value="' + attachment.id + '" type="hidden">\
 												<a class="del-img-all"></a>\
 											</div>\
@@ -965,7 +965,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 						});
 					});
 
-					fme_slider_uploader.open();
+					awefoot_slider_uploader.open();
 				});
 			});
 			</script>
@@ -979,7 +979,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 		 */
 		private static function icon() {
 			?>
-			<input <?php echo self::$item_id_attr; ?> <?php echo self::$name_attr; ?> type="hidden"
+			<input <?php echo esc_attr( self::$item_id_attr ); ?> <?php echo esc_attr( self::$name_attr ); ?> type="hidden"
 				value="<?php echo esc_attr( self::$current_value ); ?>">
 			<div class="icon-picker-wrapper">
 				<div id="preview-edit-icon-<?php echo esc_attr( self::$item_id ); ?>"
@@ -997,7 +997,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 		private static function select() {
 			?>
 			<div class="fme-custom-select">
-				<select <?php echo self::$item_id_attr; ?> <?php echo self::$name_attr; ?>>
+				<select <?php echo esc_attr( self::$item_id_attr ); ?> <?php echo esc_attr( self::$name_attr ); ?>>
 					<?php
 							$i = 0;
 					if ( ! empty( self::$settings['options'] ) && is_array( self::$settings['options'] ) ) {
@@ -1010,7 +1010,7 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 							}
 							?>
 
-					<option value="<?php echo $option_key; ?>" <?php echo $selected; ?>><?php echo $option; ?></option>
+					<option value="<?php echo esc_attr( $option_key ); ?>" <?php echo esc_attr( $selected ); ?>><?php echo esc_attr( $option ); ?></option>
 
 							<?php
 						}
@@ -1232,8 +1232,8 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 						<?php esc_html_e( 'Font Size in Pixels', 'awesome-footnotes' ); ?></option>
 					<option value=""><?php esc_html_e( 'Default', 'awesome-footnotes' ); ?></option>
 					<?php for ( $i = 8; $i < 61; $i++ ) { ?>
-					<option value="<?php echo ( $i ); ?>" <?php selected( $current_value['size'], $i ); ?>>
-						<?php echo ( $i ); ?></option>
+					<option value="<?php echo esc_attr( ( $i ) ); ?>" <?php selected( $current_value['size'], $i ); ?>>
+						<?php echo esc_attr( ( $i ) ); ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -1250,9 +1250,9 @@ if ( ! class_exists( '\FME\Settings\Settings_Builder' ) ) {
 					for ( $i = 10; $i <= 60; $i += 2.5 ) {
 						$line_height = $i / 10;
 						?>
-					<option value="<?php echo ( $line_height ); ?>"
+					<option value="<?php echo esc_attr( ( $line_height ) ); ?>"
 						<?php selected( $current_value['line_height'], $line_height ); ?>>
-						<?php echo ( $line_height ); ?>
+						<?php echo esc_attr( ( $line_height ) ); ?>
 					</option>
 					<?php } ?>
 				</select>

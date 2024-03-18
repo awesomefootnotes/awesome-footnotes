@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace FME\Migration;
+namespace AWEFOOT\Migration;
 
-use FME\Migration\Abstract_Migration;
+use AWEFOOT\Migration\Abstract_Migration;
 
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 /**
  * Migration class
  */
-if ( ! class_exists( '\FME\Migration\Migration' ) ) {
+if ( ! class_exists( '\AWEFOOT\Migration\Migration' ) ) {
 
 	/**
 	 * Put all you migration methods here
@@ -40,7 +40,7 @@ if ( ! class_exists( '\FME\Migration\Migration' ) ) {
 
 			// Check if there is previous version installed.
 			if ( \get_option( 'swas_footnote_options', false ) ) {
-				\update_option( FME_SETTINGS_NAME, \get_option( 'swas_footnote_options', array() ), false );
+				\update_option( AWEFOOT_SETTINGS_NAME, \get_option( 'swas_footnote_options', array() ), false );
 				\delete_option( 'swas_footnote_options' );
 			}
 		}

@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Option settings of the plugin
  *
@@ -7,7 +8,7 @@
  * @since 2.0.0
  */
 
-use FME\Helpers\Settings;
+use AWEFOOT\Helpers\Settings;
 
 	Settings::build_option(
 		array(
@@ -32,7 +33,7 @@ use FME\Helpers\Settings;
 			'id'      => 'no_display_post',
 			'type'    => 'checkbox',
 			'default' => Settings::get_current_options()['no_display_post'],
-			'hint' => esc_html__( 'Use this option if you want to display footnotes on separate place other than below the post (default). To achieve that you have to either use a shortcode ([fme_show_footnotes]), or direct PHP call (Footnotes_Formatter::show_footnotes();).', 'awesome-footnotes' ),
+			'hint' => esc_html__( 'Use this option if you want to display footnotes on separate place other than below the post (default). To achieve that you have to either use a shortcode ([awefoot_show_footnotes]), or direct PHP call (Footnotes_Formatter::show_footnotes();).', 'awesome-footnotes' ),
 		)
 	);
 

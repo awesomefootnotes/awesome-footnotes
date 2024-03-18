@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace FME\Helpers;
+namespace AWEFOOT\Helpers;
 
-use FME\Controllers\Pointers;
+use AWEFOOT\Controllers\Pointers;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\FME\Helpers\Review_Plugin' ) ) {
+if ( ! class_exists( '\AWEFOOT\Helpers\Review_Plugin' ) ) {
 
 	/**
 	 * Nudges the admins to review the plugin.
@@ -27,9 +27,9 @@ if ( ! class_exists( '\FME\Helpers\Review_Plugin' ) ) {
 	 */
 	class Review_Plugin {
 
-		public const REVIEW_OPTION_KEY = 'fme_review_plugin_option';
+		public const REVIEW_OPTION_KEY = 'awefoot_review_plugin_option';
 
-		public const LINK_ID = 'fme_review_plugin_link_id';
+		public const LINK_ID = 'awefoot_review_plugin_link_id';
 
 		/**
 		 * Get default object settings
@@ -123,7 +123,7 @@ if ( ! class_exists( '\FME\Helpers\Review_Plugin' ) ) {
 
 			$link .= 'plugin/';
 
-			$link .= FME_TEXTDOMAIN . '/reviews';
+			$link .= AWEFOOT_TEXTDOMAIN . '/reviews';
 			$link  = add_query_arg( 'rate', self::get_defaults()['rating'], $link );
 			$link  = esc_url( $link . '#new-post' );
 

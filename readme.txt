@@ -4,8 +4,8 @@ Requires at least: 6.0
 Tested up to: 6.4.2
 Requires PHP: 7.4
 Stable tag: 1.0.0
-License: GPLv3 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
 Allows post authors to easily add and manage footnotes in posts.
 
@@ -40,10 +40,10 @@ You can change the markup for the footnote in the settings page of the plugin.
 
 The footnote will then appear at the bottom of your post/page.
 
-Or you can use a shortcode for where you want your footnotes to appear. The shortcode is "fme_show_footnotes". The shortcode also accepts a parameter of the post id in format of 'post_id=1'. If not presented, the global \WP_Post object will be used. 
+Or you can use a shortcode for where you want your footnotes to appear. The shortcode is "awefoot_show_footnotes". The shortcode also accepts a parameter of the post id in format of 'post_id=1'. If not presented, the global \WP_Post object will be used. 
 
 You can also use a PHP call in your templates or whatever you like by using the following:
-FME\Controllers\Footnotes_Formatter::show_footnotes( array( 'post_id' => 1 ) );
+AWEFOOT\Controllers\Footnotes_Formatter::show_footnotes( array( 'post_id' => 1 ) );
 Note: If you choose this way (above), you have to go to the plugin settings, and set "Do not autodisplay in posts" to true.
 
 Advanced Custom Fields (ACF) are also supported, if the ACF is installed you will see new setting in formatting page of the settings of the plugin.
@@ -54,9 +54,9 @@ You have a fair few options on how the identifier links, footnotes and back-link
 
 == Shortcode options ==
 
-[fme_show_footnotes] Is the shortcode you should use. Inside the post content, there is nothing more that you have to do.
+[awefoot_show_footnotes] Is the shortcode you should use. Inside the post content, there is nothing more that you have to do.
 If you want to use the shortcode outside of the post content, then you need to add the post id as a parameter:
-[fme_show_footnotes post_id=1]
+[awefoot_show_footnotes post_id=1]
 If outside of the post content, and there is no parameter of the post id provided, then the plugin will try to use the global post if presented.
 
 == Paginated Posts ==

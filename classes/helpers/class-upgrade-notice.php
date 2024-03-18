@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace FME\Helpers;
+namespace AWEFOOT\Helpers;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Upgrade notice class
  */
-if ( ! class_exists( '\FME\Helpers\Upgrade_Notice' ) ) {
+if ( ! class_exists( '\AWEFOOT\Helpers\Upgrade_Notice' ) ) {
 	/**
 	 * Utility class for showing the upgrade notice in the plugins page.
 	 *
@@ -45,7 +45,7 @@ if ( ! class_exists( '\FME\Helpers\Upgrade_Notice' ) ) {
 			}
 
 			if ( 'plugins' === $current_screen->id ) {
-				\add_action( 'in_plugin_update_message-' . FME_PLUGIN_BASENAME, array( __CLASS__, 'prefix_plugin_update_message' ), 10, 2 );
+				\add_action( 'in_plugin_update_message-' . AWEFOOT_PLUGIN_BASENAME, array( __CLASS__, 'prefix_plugin_update_message' ), 10, 2 );
 			}
 		}
 
@@ -61,7 +61,7 @@ if ( ! class_exists( '\FME\Helpers\Upgrade_Notice' ) ) {
 		 */
 		public static function prefix_plugin_update_message( $data, $response ) {
 
-			$current_version_parts = explode( '.', FME_VERSION );
+			$current_version_parts = explode( '.', AWEFOOT_VERSION );
 			$new_version_parts     = explode( '.', $response->new_version );
 
 			// If user has already moved to the minor version, we don't need to flag up anything.
@@ -89,7 +89,7 @@ if ( ! class_exists( '\FME\Helpers\Upgrade_Notice' ) ) {
 		 * @since 1.6.0
 		 */
 		private static function get_upgrade_notice( $version ) {
-			$transient_name = 'fme_upgrade_notice_' . $version;
+			$transient_name = 'awefoot_upgrade_notice_' . $version;
 			$upgrade_notice = get_transient( $transient_name );
 
 			if ( false === $upgrade_notice || empty( $upgrade_notice ) ) {
@@ -134,7 +134,7 @@ if ( ! class_exists( '\FME\Helpers\Upgrade_Notice' ) ) {
 			$style = '';
 
 			foreach ( $check_for_notices as $check_version ) {
-				if ( version_compare( FME_VERSION, $check_version, '>' ) ) {
+				if ( version_compare( AWEFOOT_VERSION, $check_version, '>' ) ) {
 					continue;
 				}
 
@@ -144,7 +144,7 @@ if ( ! class_exists( '\FME\Helpers\Upgrade_Notice' ) ) {
 
 					if ( version_compare( trim( $matches[1] ), $check_version, '=' ) ) {
 						$style           = '<style>
-							.fme_plugin_upgrade_notice {
+							.awefoot_plugin_upgrade_notice {
 								font-weight: normal;
 								background: #fff8e5 !important;
 								border-left: none !important;
@@ -152,7 +152,7 @@ if ( ! class_exists( '\FME\Helpers\Upgrade_Notice' ) ) {
 								padding: 9px 0 20px 32px !important;
 								margin: 0 -12px 0 -20px !important;
 							}
-							p.fme_plugin_upgrade_notice::before {
+							p.awefoot_plugin_upgrade_notice::before {
 									content: "\f348" !important;
 									display: inline-block;
 									font: 400 18px/1 dashicons;
@@ -167,7 +167,7 @@ if ( ! class_exists( '\FME\Helpers\Upgrade_Notice' ) ) {
 								margin: 9px !important;
 							}
 						</style>';
-						$upgrade_notice .= '<p class="fme_plugin_upgrade_notice">';
+						$upgrade_notice .= '<p class="awefoot_plugin_upgrade_notice">';
 
 						foreach ( $notices as $line ) {
 							$upgrade_notice .= preg_replace( '~\[([^\]]*)\]\(([^\)]*)\)~', '<a href="${2}">${1}</a>', $line ) . '<br>';

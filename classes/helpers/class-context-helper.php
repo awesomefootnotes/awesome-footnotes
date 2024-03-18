@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace FME\Helpers;
+namespace AWEFOOT\Helpers;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\FME\Helpers\Context_Helper' ) ) {
+if ( ! class_exists( '\AWEFOOT\Helpers\Context_Helper' ) ) {
 	/**
 	 * Responsible for proper context determination.
 	 *
@@ -165,39 +165,6 @@ if ( ! class_exists( '\FME\Helpers\Context_Helper' ) ) {
 			$rest_path    = trim( (string) parse_url( (string) get_rest_url(), PHP_URL_PATH ), '/' ) . '/'; // phpcs:ignore WordPress.WP.AlternativeFunctions.parse_url_parse_url
 
 			return strpos( $current_path, $rest_path ) === 0;
-		}
-
-		/**
-		 * Is that a login request
-		 *
-		 * @return bool
-		 *
-		 * @since 1.0.0
-		 */
-		private static function is_login_request(): bool {
-			/**
-			 * New core function with WordPress 6.1
-			 *
-			 * @link https://make.wordpress.org/core/2022/09/11/new-is_login-function-for-determining-if-a-page-is-the-login-screen/
-			 */
-			if ( function_exists( 'is_login' ) ) {
-				return is_login() !== false;
-			}
-
-			if (!empty($_REQUEST['interim-login'])) { // phpcs:ignore
-				return true;
-			}
-
-			/**
-			 * Fallback and 1:1 copy from is_login() in case, the function is
-			 * not available for WP < 6.1.
-			 * phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotValidated
-			 * phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-			 * phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			 */
-			$script_name = $_SERVER['SCRIPT_NAME'] ?? '';
-
-			return false !== stripos( wp_login_url(), $script_name );
 		}
 
 		/**

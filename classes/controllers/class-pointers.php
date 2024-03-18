@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace FME\Controllers;
+namespace AWEFOOT\Controllers;
 
-use FME\Helpers\Settings;
+use AWEFOOT\Helpers\Settings;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\FME\Controllers\Pointers' ) ) {
+if ( ! class_exists( '\AWEFOOT\Controllers\Pointers' ) ) {
 	/**
 	 * Responsible for showing the pointers.
 	 *
@@ -67,7 +67,7 @@ if ( ! class_exists( '\FME\Controllers\Pointers' ) ) {
 		 */
 		public static function print_footer_scripts() {
 
-			$element_id = 'toplevel_page_fme_settings';
+			$element_id = 'toplevel_page_awefoot_settings';
 			?>
 			<script>
 				jQuery(

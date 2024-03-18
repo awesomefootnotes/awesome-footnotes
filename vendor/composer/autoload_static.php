@@ -9,12 +9,12 @@ class ComposerStaticInitcfdb79b3161cca532bdaefc1d0b65af6
     public static $prefixLengthsPsr4 = array (
         'F' => 
         array (
-            'FME\\' => 4,
+            'AWEFOOT\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'FME\\' => 
+        'AWEFOOT\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes',
         ),
@@ -22,17 +22,17 @@ class ComposerStaticInitcfdb79b3161cca532bdaefc1d0b65af6
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'FME\\Awesome_Footnotes' => __DIR__ . '/../..' . '/classes/class-awsome-footnotes.php',
-        'FME\\Controllers\\Footnotes_Formatter' => __DIR__ . '/../..' . '/classes/controllers/class-footnotes-formatter.php',
-        'FME\\Controllers\\Integrations' => __DIR__ . '/../..' . '/classes/controllers/class-integrations.php',
-        'FME\\Controllers\\Pointers' => __DIR__ . '/../..' . '/classes/controllers/class-pointers.php',
-        'FME\\Helpers\\Context_Helper' => __DIR__ . '/../..' . '/classes/helpers/class-context-helper.php',
-        'FME\\Helpers\\Review_Plugin' => __DIR__ . '/../..' . '/classes/helpers/class-review-plugin.php',
-        'FME\\Helpers\\Settings' => __DIR__ . '/../..' . '/classes/helpers/class-settings.php',
-        'FME\\Helpers\\Upgrade_Notice' => __DIR__ . '/../..' . '/classes/helpers/class-upgrade-notice.php',
-        'FME\\Migration\\Abstract_Migration' => __DIR__ . '/../..' . '/classes/migration/class-abstract-migration.php',
-        'FME\\Migration\\Migration' => __DIR__ . '/../..' . '/classes/migration/class-migration.php',
-        'FME\\Settings\\Settings_Builder' => __DIR__ . '/../..' . '/classes/settings/class-settings-builder.php',
+        'AWEFOOT\\Awesome_Footnotes' => __DIR__ . '/../..' . '/classes/class-awsome-footnotes.php',
+        'AWEFOOT\\Controllers\\Footnotes_Formatter' => __DIR__ . '/../..' . '/classes/controllers/class-footnotes-formatter.php',
+        'AWEFOOT\\Controllers\\Integrations' => __DIR__ . '/../..' . '/classes/controllers/class-integrations.php',
+        'AWEFOOT\\Controllers\\Pointers' => __DIR__ . '/../..' . '/classes/controllers/class-pointers.php',
+        'AWEFOOT\\Helpers\\Context_Helper' => __DIR__ . '/../..' . '/classes/helpers/class-context-helper.php',
+        'AWEFOOT\\Helpers\\Review_Plugin' => __DIR__ . '/../..' . '/classes/helpers/class-review-plugin.php',
+        'AWEFOOT\\Helpers\\Settings' => __DIR__ . '/../..' . '/classes/helpers/class-settings.php',
+        'AWEFOOT\\Helpers\\Upgrade_Notice' => __DIR__ . '/../..' . '/classes/helpers/class-upgrade-notice.php',
+        'AWEFOOT\\Migration\\Abstract_Migration' => __DIR__ . '/../..' . '/classes/migration/class-abstract-migration.php',
+        'AWEFOOT\\Migration\\Migration' => __DIR__ . '/../..' . '/classes/migration/class-migration.php',
+        'AWEFOOT\\Settings\\Settings_Builder' => __DIR__ . '/../..' . '/classes/settings/class-settings-builder.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

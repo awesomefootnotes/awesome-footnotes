@@ -62,7 +62,7 @@ function attachAllDynamicSelects() {
                 return {
                     q: params.term, // search query
                     block: activeBlock,
-                    action: 'fme_get_posts' // AJAX action for admin-ajax.php
+                    action: 'awefoot_get_posts' // AJAX action for admin-ajax.php
                 };
             },
             processResults: function (data) {
@@ -110,7 +110,7 @@ function attachAllDynamicPostTypes() {
                 dataType: "json",
                 data: {
                     q: request.term, // search query
-                    action: 'fme_get_posts', // AJAX action for admin-ajax.php
+                    action: 'awefoot_get_posts', // AJAX action for admin-ajax.php
                     type: 'input'
                 },
                 success: function (data) {
@@ -396,7 +396,7 @@ $doc.ready(function () {
     });
 
     /* Assign a Class to the slider depending on the Image Style */
-    $doc.on('click', '#fme_featured_posts_style a', function () {
+    $doc.on('click', '#awefoot_featured_posts_style a', function () {
         var sliderClass = jQuery(this).find('img').attr('class') + '-container';
         jQuery('#main-slider-options').attr('class', sliderClass);
         return false;
@@ -423,23 +423,23 @@ $doc.ready(function () {
     ------------------------------------------------------------------------------------------ */
     /* COLOR PICKER */
     if (jQuery().wpColorPicker) {
-        fme_color_picker();
+        awefoot_color_picker();
     }
 
 
     /* PAGE BUILDER DRAG AND DROP */
-    fme_builder_dragdrop();
+    awefoot_builder_dragdrop();
 
 
     /* IMAGE UPLOADER PREVIEW */
     jQuery('.fme-img-path').each(function () {
-        fme_image_uploader_trigger(jQuery(this));
+        awefoot_image_uploader_trigger(jQuery(this));
     });
 
 
     /* Font Uploader */
     jQuery('.fme-font-path').each(function () {
-        fme_set_font_uploader(jQuery(this));
+        awefoot_set_font_uploader(jQuery(this));
     });
 
 
@@ -465,34 +465,34 @@ $doc.ready(function () {
 
     /* Widget Tabs Sortable  */
     jQuery('.tab-sortable').each(function () {
-        fme_sortable_tabs_trigger(jQuery(this));
+        awefoot_sortable_tabs_trigger(jQuery(this));
     });
 
     /* Widget Posts order option  */
     jQuery('.fme-posts-order-option').each(function () {
-        fme_widget_posts_order(jQuery(this));
+        awefoot_widget_posts_order(jQuery(this));
     });
 
     /* Trigger when Widget Added */
     $doc.on('widget-added', function (event, widgetContainer) {
 
         var $thisTabs = widgetContainer.find('.tab-sortable');
-        fme_sortable_tabs_trigger($thisTabs);
+        awefoot_sortable_tabs_trigger($thisTabs);
 
         // ------
         var $thisOption = widgetContainer.find('.fme-posts-order-option');
-        fme_widget_posts_order($thisOption);
+        awefoot_widget_posts_order($thisOption);
     });
 
     /* Trigger when Widget Updated */
     $doc.on('widget-updated', function (event, widgetContainer) {
 
         var $thisTabs = widgetContainer.find('.tab-sortable');
-        fme_sortable_tabs_trigger($thisTabs);
+        awefoot_sortable_tabs_trigger($thisTabs);
 
         // ------
         var $thisOption = widgetContainer.find('.fme-posts-order-option');
-        fme_widget_posts_order($thisOption);
+        awefoot_widget_posts_order($thisOption);
     });
 
     /* DISMISS NOTICES
@@ -515,7 +515,7 @@ $doc.ready(function () {
     ------------------------------------------------------------------------------------------ */
     var $saveAlert = jQuery('#fme-saving-settings');
 
-    jQuery('#fme_form').submit(function () {
+    jQuery('#awefoot_form').submit(function () {
 
         // Check if the import field has a file
         var importSettings = jQuery('#fme-import-file').val();
@@ -524,7 +524,7 @@ $doc.ready(function () {
         }
 
         // Disable all blank fields to reduce the size of the data
-        jQuery('form#fme_form input, form#fme_form textarea, form#fme_form select').each(function () {
+        jQuery('form#awefoot_form input, form#awefoot_form textarea, form#awefoot_form select').each(function () {
             if (!jQuery(this).val()) {
                 jQuery(this).attr('disabled', true);
             }
@@ -534,7 +534,7 @@ $doc.ready(function () {
         var data = jQuery(this).serialize();
 
         // Re-activate the disabled options
-        jQuery('form#fme_form input:disabled, form#fme_form textarea:disabled, form#fme_form select:disabled').attr('disabled', false);
+        jQuery('form#awefoot_form input:disabled, form#awefoot_form textarea:disabled, form#awefoot_form select:disabled').attr('disabled', false);
 
         // Add the Overlay layer and reset the saving spinner
         $figaroBody.addClass('has-overlay');
@@ -598,7 +598,7 @@ $doc.ready(function () {
     var currentTab = window.location.hash.replace('-target', '');
     currentTab = currentTab.replace(/\//g, ''); // avoid issues when the URL contains something like #/campaign/0/contacts
 
-    if (jQuery(currentTab).parent('#fme_form').length) {
+    if (jQuery(currentTab).parent('#awefoot_form').length) {
         var tabLinkClass = currentTab.replace('#', '.');
         jQuery('.tabs-wrap').hide();
         jQuery('.fme-panel-tabs ul li').removeClass('active');
@@ -656,7 +656,7 @@ $doc.ready(function () {
 				<li class="parent-item">\
 					<div class="fme-block-head">\
 						'+ customtext + '\
-						<input name="_fme_hlights_text['+ customnext + ']" type="hidden" value="' + customtext + '" />\
+						<input name="_awefoot_hlights_text['+ customnext + ']" type="hidden" value="' + customtext + '" />\
 						<a class="del-item dashicons dashicons-trash"></a>\
 					</div>\
 				</li>\
@@ -686,7 +686,7 @@ $doc.ready(function () {
             if (source_link.length > 0) {
                 source_code += '\
 							<a href="'+ source_link + '" target="_blank">' + source_name + '</a>\
-							<input name="_fme_post_source['+ source_next + '][url]" type="hidden" value="' + source_link + '" />\
+							<input name="_awefoot_post_source['+ source_next + '][url]" type="hidden" value="' + source_link + '" />\
 						';
             }
             else {
@@ -694,7 +694,7 @@ $doc.ready(function () {
             }
 
             source_code += '\
-						<input name="_fme_post_source['+ source_next + '][text]" type="hidden" value="' + source_name + '" />\
+						<input name="_awefoot_post_source['+ source_next + '][text]" type="hidden" value="' + source_name + '" />\
 						<a class="del-item dashicons dashicons-trash"></a>\
 					</div>\
 				</li>\
@@ -727,7 +727,7 @@ $doc.ready(function () {
             if (via_link.length > 0) {
                 via_code += '\
 							<a href="'+ via_link + '" target="_blank">' + via_name + '</a>\
-							<input name="_fme_post_via['+ via_next + '][url]" type="hidden" value="' + via_link + '" />\
+							<input name="_awefoot_post_via['+ via_next + '][url]" type="hidden" value="' + via_link + '" />\
 						';
             }
             else {
@@ -735,7 +735,7 @@ $doc.ready(function () {
             }
 
             via_code += '\
-						<input name="_fme_post_via['+ via_next + '][text]" type="hidden" value="' + via_name + '" />\
+						<input name="_awefoot_post_via['+ via_next + '][text]" type="hidden" value="' + via_name + '" />\
 						<a class="del-item dashicons dashicons-trash"></a>\
 					</div>\
 				</li>\
@@ -786,7 +786,7 @@ $doc.ready(function () {
             $featured_posts_options.show();
         }
 
-        $doc.on('click', '#fme_featured_posts_style a', function () {
+        $doc.on('click', '#awefoot_featured_posts_style a', function () {
             var selected_val = jQuery(this).closest('li').find('input').val();
 
             if (selected_val == 'videos_list') {
@@ -805,7 +805,7 @@ $doc.ready(function () {
     ------------------------------------------------------------------------------------------ */
     jQuery('.predefined-skins-options select').change(function () {
         var skin = jQuery(this).val(),
-            skin_colors = fme_skins[skin];
+            skin_colors = awefoot_skins[skin];
 
         jQuery('#fme-options-tab-styling').find('.figaroColorSelector').val('');
         jQuery('#fme-options-tab-styling').find('.wp-color-result').attr('style', '');
@@ -823,7 +823,7 @@ $doc.ready(function () {
 
 /* Fire Sortable on the Widgets Tabs
 ------------------------------------------------------------------------------------------ */
-function fme_sortable_tabs_trigger($thisTabs) {
+function awefoot_sortable_tabs_trigger($thisTabs) {
 
     $thisTabs.sortable({
         placeholder: 'fme-state-highlight',
@@ -843,7 +843,7 @@ function fme_sortable_tabs_trigger($thisTabs) {
 
 /* IMAGE UPLOADER PREVIEW
 ------------------------------------------------------------------------------------------ */
-function fme_image_uploader_trigger($thisElement) {
+function awefoot_image_uploader_trigger($thisElement) {
 
     var thisElementID = $thisElement.attr('id').replace('#', ''),
         $thisElementParent = $thisElement.closest('.option-item'),
@@ -860,14 +860,14 @@ function fme_image_uploader_trigger($thisElement) {
         uploaderTypeStyles = true;
     }
 
-    fme_set_uploader(thisElementID, uploaderTypeStyles);
+    awefoot_set_uploader(thisElementID, uploaderTypeStyles);
 }
 
 
 
 /* IMAGE UPLOADER FUNCTIONS
 ------------------------------------------------------------------------------------------ */
-function fme_builder_dragdrop() {
+function awefoot_builder_dragdrop() {
 
     jQuery('#fme-builder-wrapper').sortable({
         placeholder: 'fme-state-highlight fme-state-sections',
@@ -913,8 +913,8 @@ function fme_builder_dragdrop() {
         receive: function (event, ui) {
             var sectionID = jQuery(this).data('section-id');
 
-            ui.item.find('[name^=fme_home_cats]').each(function () {
-                var newName = jQuery(this).attr('name').replace(/fme_home_cats\[(\w+)\]/g, 'fme_home_cats\[' + sectionID + ']');
+            ui.item.find('[name^=awefoot_home_cats]').each(function () {
+                var newName = jQuery(this).attr('name').replace(/awefoot_home_cats\[(\w+)\]/g, 'awefoot_home_cats\[' + sectionID + ']');
                 jQuery(this).attr('name', newName);
             });
         },
@@ -939,21 +939,21 @@ function fme_builder_dragdrop() {
 
 /* IMAGE UPLOADER FUNCTIONS
 ------------------------------------------------------------------------------------------ */
-function fme_set_uploader(field, styling) {
-    var fme_bg_uploader;
+function awefoot_set_uploader(field, styling) {
+    var awefoot_bg_uploader;
 
     $doc.on('click', '#upload_' + field + '_button', function (event) {
 
         event.preventDefault();
-        fme_bg_uploader = wp.media.frames.fme_bg_uploader = wp.media({
+        awefoot_bg_uploader = wp.media.frames.awefoot_bg_uploader = wp.media({
             title: 'Choose Image',
             library: { type: 'image' },
             button: { text: 'Select' },
             multiple: false
         });
 
-        fme_bg_uploader.on('select', function () {
-            var selection = fme_bg_uploader.state().get('selection');
+        awefoot_bg_uploader.on('select', function () {
+            var selection = awefoot_bg_uploader.state().get('selection');
             selection.map(function (attachment) {
 
                 attachment = attachment.toJSON();
@@ -971,7 +971,7 @@ function fme_set_uploader(field, styling) {
             });
         });
 
-        fme_bg_uploader.open();
+        awefoot_bg_uploader.open();
     });
 }
 
@@ -979,7 +979,7 @@ function fme_set_uploader(field, styling) {
 
 /* Custom Color Picker
 ------------------------------------------------------------------------------------------ */
-function fme_color_picker() {
+function awefoot_color_picker() {
     Color.prototype.toString = function (remove_alpha) {
         if (remove_alpha == 'no-alpha') {
             return this.toCSS('rgba', '1').replace(/\s+/g, '');

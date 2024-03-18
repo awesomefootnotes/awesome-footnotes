@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
  * Advanced settings of the plugin
  *
@@ -7,7 +9,7 @@
  * @since 2.0.0
  */
 
-use FME\Helpers\Settings;
+use AWEFOOT\Helpers\Settings;
 
 Settings::build_option(
 	array(

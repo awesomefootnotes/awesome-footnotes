@@ -11,16 +11,16 @@
 
 declare(strict_types=1);
 
-namespace FME\Helpers;
+namespace AWEFOOT\Helpers;
 
-use FME\Settings\Settings_Builder;
+use AWEFOOT\Settings\Settings_Builder;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
+if ( ! class_exists( '\AWEFOOT\Helpers\Settings' ) ) {
 	/**
 	 * Responsible for proper context determination.
 	 *
@@ -30,15 +30,15 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 
 		public const OPTIONS_VERSION = '9'; // Incremented when the options array changes.
 
-		public const MENU_SLUG = 'fme_settings';
+		public const MENU_SLUG = 'awefoot_settings';
 
 		public const OPTIONS_PAGE_SLUG = 'footnotes-options-page';
 
-		public const SETTINGS_FILE_FIELD = 'fme_import_file';
+		public const SETTINGS_FILE_FIELD = 'awefoot_import_file';
 
-		public const SETTINGS_FILE_UPLOAD_FIELD = 'fme_import_upload';
+		public const SETTINGS_FILE_UPLOAD_FIELD = 'awefoot_import_upload';
 
-		public const SETTINGS_VERSION = 'fme_plugin_version';
+		public const SETTINGS_VERSION = 'awefoot_plugin_version';
 
 		/**
 		 * Array with the current options
@@ -89,12 +89,12 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 			/**
 			 * Save Options
 			 */
-			\add_action( 'wp_ajax_fme_plugin_data_save', array( __CLASS__, 'save_settings_ajax' ) );
+			\add_action( 'wp_ajax_awefoot_plugin_data_save', array( __CLASS__, 'save_settings_ajax' ) );
 
 			/**
 			 * Draws the save button in the settings
 			 */
-			\add_action( 'fme_settings_save_button', array( __CLASS__, 'save_button' ) );
+			\add_action( 'awefoot_settings_save_button', array( __CLASS__, 'save_button' ) );
 		}
 
 		/**
@@ -108,22 +108,11 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 
 			if ( \check_ajax_referer( 'fme-plugin-data', 'fme-security' ) ) {
 
-				if ( isset( $_POST[ \FME_SETTINGS_NAME ] ) && ! empty( $_POST[ \FME_SETTINGS_NAME ] ) && \is_array( $_POST[ \FME_SETTINGS_NAME ] ) ) {
+				if ( isset( $_POST[ \AWEFOOT_SETTINGS_NAME ] ) && ! empty( $_POST[ \AWEFOOT_SETTINGS_NAME ] ) && \is_array( $_POST[ \AWEFOOT_SETTINGS_NAME ] ) ) {
 
-					$data = array_map( 'sanitize_text_field', \stripslashes_deep( $_POST[ \FME_SETTINGS_NAME ] ) );
+					$data = array_map( 'sanitize_text_field', \stripslashes_deep( $_POST[ \AWEFOOT_SETTINGS_NAME ] ) );
 
-					if ( isset( $_POST[ \FME_SETTINGS_NAME ]['css_footnotes'] ) ) {
-						$data['css_footnotes'] = \_sanitize_text_fields( \wp_unslash( $_POST[ \FME_SETTINGS_NAME ]['css_footnotes'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-					}
-
-					if ( isset( $_POST[ \FME_SETTINGS_NAME ]['pre_footnotes'] ) ) {
-						$data['pre_footnotes'] = \wpautop( \wp_unslash( $_POST[ \FME_SETTINGS_NAME ]['pre_footnotes'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-					}
-
-					if ( isset( $_POST[ \FME_SETTINGS_NAME ]['post_footnotes'] ) ) {
-						$data['post_footnotes'] = \wpautop( \wp_unslash( $_POST[ \FME_SETTINGS_NAME ]['post_footnotes'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-					}
-					\update_option( FME_SETTINGS_NAME, self::store_options( $data ) );
+					\update_option( AWEFOOT_SETTINGS_NAME, self::store_options( $data ) );
 
 					\wp_send_json_success( 2 );
 				}
@@ -188,9 +177,9 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 
 			$footnotes_options['no_display_post'] = ( array_key_exists( 'no_display_post', $post_array ) ) ? true : false;
 
-			// add_settings_error(FME_SETTINGS_NAME, '<field_name>', 'Please enter a valid email!', $type = 'error'); .
+			// add_settings_error(AWEFOOT_SETTINGS_NAME, '<field_name>', 'Please enter a valid email!', $type = 'error'); .
 
-			// update_option( FME_SETTINGS_NAME, $footnotes_options ); .
+			// update_option( AWEFOOT_SETTINGS_NAME, $footnotes_options ); .
 
 			self::$current_options = $footnotes_options;
 
@@ -209,11 +198,11 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 			if ( empty( self::$current_options ) ) {
 
 				// Get the current settings or setup some defaults if needed.
-				self::$current_options = \get_option( FME_SETTINGS_NAME );
+				self::$current_options = \get_option( AWEFOOT_SETTINGS_NAME );
 				if ( ! self::$current_options ) {
 
 					self::$current_options = self::get_default_options();
-					\update_option( FME_SETTINGS_NAME, self::$current_options );
+					\update_option( AWEFOOT_SETTINGS_NAME, self::$current_options );
 				} elseif ( ! isset( self::$current_options['version'] ) || self::OPTIONS_VERSION !== self::$current_options['version'] ) {
 
 					// Set any unset options.
@@ -223,7 +212,7 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 						}
 					}
 					self::$current_options['version'] = self::OPTIONS_VERSION;
-					\update_option( FME_SETTINGS_NAME, self::$current_options );
+					\update_option( AWEFOOT_SETTINGS_NAME, self::$current_options );
 				}
 			}
 
@@ -301,15 +290,15 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 				'manage_options',
 				self::MENU_SLUG,
 				array( __CLASS__, 'footnotes_options_page' ),
-				'data:image/svg+xml;base64,' . $base( file_get_contents( FME_PLUGIN_ROOT . 'assets/icon.svg' ) ), // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode, WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+				'data:image/svg+xml;base64,' . $base( file_get_contents( AWEFOOT_PLUGIN_ROOT . 'assets/icon.svg' ) ), // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode, WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 				30
 			);
 
 			register_setting(
-				FME_SETTINGS_NAME,
-				FME_SETTINGS_NAME,
+				AWEFOOT_SETTINGS_NAME,
+				AWEFOOT_SETTINGS_NAME,
 				array(
-					'\FME\Helpers\Settings',
+					'\AWEFOOT\Helpers\Settings',
 					'store_options',
 				)
 			);
@@ -323,7 +312,7 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 			// Reset settings.
 			if ( isset( $_REQUEST['reset-settings'] ) && check_admin_referer( 'reset-plugin-settings', 'reset_nonce' ) ) {
 
-				\delete_option( FME_SETTINGS_NAME );
+				\delete_option( AWEFOOT_SETTINGS_NAME );
 
 				// Redirect to the plugin settings page.
 				wp_safe_redirect(
@@ -341,13 +330,13 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 				global $wpdb;
 
 				$stored_options = $wpdb->get_results(
-					$wpdb->prepare( 'SELECT option_name, option_value FROM ' . $wpdb->options . ' WHERE option_name = %s', FME_SETTINGS_NAME )
+					$wpdb->prepare( 'SELECT option_name, option_value FROM ' . $wpdb->options . ' WHERE option_name = %s', AWEFOOT_SETTINGS_NAME )
 				);
 
 				header( 'Cache-Control: public, must-revalidate' );
 				header( 'Pragma: hack' );
 				header( 'Content-Type: text/plain' );
-				header( 'Content-Disposition: attachment; filename="' . FME_TEXTDOMAIN . '-options-' . gmdate( 'dMy' ) . '.dat"' );
+				header( 'Content-Disposition: attachment; filename="' . AWEFOOT_TEXTDOMAIN . '-options-' . gmdate( 'dMy' ) . '.dat"' );
 				echo wp_json_encode( unserialize( $stored_options[0]->option_value ) );
 				die();
 			} elseif ( isset( $_FILES[ self::SETTINGS_FILE_FIELD ] ) && \check_admin_referer( 'fme-plugin-data', 'fme-security' ) ) { // Import the settings.
@@ -367,7 +356,7 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 					}
 
 					if ( ! empty( $options ) && is_array( $options ) ) {
-						\update_option( FME_SETTINGS_NAME, self::store_options( $options ) );
+						\update_option( AWEFOOT_SETTINGS_NAME, self::store_options( $options ) );
 					}
 				}
 
@@ -403,10 +392,10 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function render() {
-			\wp_enqueue_script( 'fme-admin-scripts', FME_PLUGIN_ROOT_URL . '/js/admin/fme-settings.js', array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-draggable', 'wp-color-picker', 'jquery-ui-autocomplete' ), FME_VERSION, false );
-			\wp_enqueue_style( 'fme-admin-style', FME_PLUGIN_ROOT_URL . '/css/admin/style.css', array(), FME_VERSION, 'all' );
+			\wp_enqueue_script( 'fme-admin-scripts', AWEFOOT_PLUGIN_ROOT_URL . '/js/admin/fme-settings.js', array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-draggable', 'wp-color-picker', 'jquery-ui-autocomplete' ), AWEFOOT_VERSION, false );
+			\wp_enqueue_style( 'fme-admin-style', AWEFOOT_PLUGIN_ROOT_URL . '/css/admin/style.css', array(), AWEFOOT_VERSION, 'all' );
 
-			self::fme_show_options();
+			self::awefoot_show_options();
 		}
 
 		/**
@@ -510,7 +499,7 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 		 *
 		 * @since 2.0.0
 		 */
-		public static function fme_show_options() {
+		public static function awefoot_show_options() {
 
 			wp_enqueue_media();
 
@@ -591,7 +580,7 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 							</g>
 						</svg>
 					</div>
-					<div class="plugin-name" style="color: #fff; text-align: center; font-size: 1.4em; padding: 30px 0;"><?php echo \esc_html( FME_NAME ); ?></div>
+					<div class="plugin-name" style="color: #fff; text-align: center; font-size: 1.4em; padding: 30px 0;"><?php echo \esc_html( AWEFOOT_NAME ); ?></div>
 
 					<ul>
 						<?php
@@ -625,7 +614,7 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 					</div>
 
 
-					<form method="post" name="fme_form" id="fme_form" enctype="multipart/form-data">
+					<form method="post" name="awefoot_form" id="awefoot_form" enctype="multipart/form-data">
 
 						<?php
 						foreach ( $settings_tabs as $tab => $settings ) {
@@ -635,9 +624,9 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 						<div id="fme-options-tab-<?php echo \esc_attr( $tab ); ?>" class="tabs-wrap">
 
 							<?php
-							include_once FME_PLUGIN_ROOT . 'classes/settings/settings-options/' . $tab . '.php';
+							include_once AWEFOOT_PLUGIN_ROOT . 'classes/settings/settings-options/' . $tab . '.php';
 
-							do_action( 'fme_plugin_options_tab_' . $tab );
+							do_action( 'awefoot_plugin_options_tab_' . $tab );
 							?>
 
 						</div>
@@ -646,11 +635,11 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 						?>
 
 						<?php wp_nonce_field( 'fme-plugin-data', 'fme-security' ); ?>
-						<input type="hidden" name="action" value="fme_plugin_data_save" />
+						<input type="hidden" name="action" value="awefoot_plugin_data_save" />
 
 						<div class="fme-footer">
 
-							<?php \do_action( 'fme_settings_save_button' ); ?>
+							<?php \do_action( 'awefoot_settings_save_button' ); ?>
 						</div>
 					</form>
 
@@ -737,7 +726,7 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 				$data = self::get_current_options()[ $value['id'] ];
 			}
 
-			Settings_Builder::create( $value, FME_SETTINGS_NAME . '[' . $value['id'] . ']', $data );
+			Settings_Builder::create( $value, AWEFOOT_SETTINGS_NAME . '[' . $value['id'] . ']', $data );
 		}
 
 		/**
@@ -781,7 +770,7 @@ if ( ! class_exists( '\FME\Helpers\Settings' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function store_version(): void {
-			\update_option( self::SETTINGS_VERSION, \FME_VERSION );
+			\update_option( self::SETTINGS_VERSION, \AWEFOOT_VERSION );
 		}
 	}
 }

@@ -10,16 +10,16 @@
 
 declare(strict_types=1);
 
-namespace FME\Migration;
+namespace AWEFOOT\Migration;
 
-use FME\Helpers\Settings;
+use AWEFOOT\Helpers\Settings;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
  * Abstract AMigration class
  */
-if ( ! class_exists( '\FME\Migration\Abstract_Migration' ) ) {
+if ( ! class_exists( '\AWEFOOT\Migration\Abstract_Migration' ) ) {
 
 	/**
 	 * Utility class to ease the migration process.
@@ -42,7 +42,7 @@ if ( ! class_exists( '\FME\Migration\Abstract_Migration' ) ) {
 	 *
 	 * Note: order of the methods is not preserved - version numbers will be used for ordering
 	 *
-	 * @package FME\Utils
+	 * @package AWEFOOT\Utils
 	 *
 	 * @since 2.0.0
 	 */
@@ -85,10 +85,10 @@ if ( ! class_exists( '\FME\Migration\Abstract_Migration' ) ) {
 		 */
 		public static function migrate() {
 
-			if ( version_compare( static::get_stored_version(), FME_VERSION, '<' ) ) {
+			if ( version_compare( static::get_stored_version(), AWEFOOT_VERSION, '<' ) ) {
 
 				$stored_version_as_number  = static::normalize_version( static::get_stored_version() );
-				$target_version_as_number  = static::normalize_version( FME_VERSION );
+				$target_version_as_number  = static::normalize_version( AWEFOOT_VERSION );
 				$method_as_version_numbers = static::get_all_migration_methods_as_numbers();
 
 				$migrate_methods = array_filter(
@@ -121,7 +121,7 @@ if ( ! class_exists( '\FME\Migration\Abstract_Migration' ) ) {
 			 *
 			 * @since 2.0.0
 			 */
-			if ( version_compare( static::get_stored_version(), \FME_VERSION, '>' ) ) {
+			if ( version_compare( static::get_stored_version(), \AWEFOOT_VERSION, '>' ) ) {
 				self::store_updated_version();
 			}
 		}

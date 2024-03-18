@@ -1,0 +1,23 @@
+{
+    "name": "awesomefootnotes/awesome-footnotes",
+    "description": "Add footnotes to you posts with ease",
+    "type": "wordpress-plugin",
+    "version": "1.0.0",
+    "authors": [
+      {
+        "name": "awesome-footnotes",
+        "email": "quotecites.com@gmail.com"
+      }
+    ],
+    "require": {
+      "php": ">=7.4"
+    },
+    "autoload": {
+      "psr-4": {
+        "AWEFOOT\\": "classes/"
+      },
+      "classmap": [
+        "classes/"
+      ]
+    }
+  }

@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace FME\Controllers;
+namespace AWEFOOT\Controllers;
 
-use FME\Helpers\Settings;
+use AWEFOOT\Helpers\Settings;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( '\FME\Controllers\Integrations' ) ) {
+if ( ! class_exists( '\AWEFOOT\Controllers\Integrations' ) ) {
 	/**
 	 * Responsible for proper context determination.
 	 *
@@ -59,7 +59,7 @@ if ( ! class_exists( '\FME\Controllers\Integrations' ) ) {
 			?>
 			<!-- TinyMCE Shortcode Plugin -->
 			<script>
-			var fme_gut = {
+			var awefoot_gut = {
 				'open' : '<?php echo Settings::get_current_options()['footnotes_open']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>',
 				'close' : '<?php echo Settings::get_current_options()['footnotes_close']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>',
 			};
@@ -95,9 +95,9 @@ if ( ! class_exists( '\FME\Controllers\Integrations' ) ) {
 		public static function footnotes_made_easy_enqueue_admin_styles() {
 			wp_enqueue_style(
 				'footnotes-gutenberg_css',
-				FME_PLUGIN_ROOT_URL . '/css/footnotes-gutenberg.css',
+				AWEFOOT_PLUGIN_ROOT_URL . '/css/footnotes-gutenberg.css',
 				array(),
-				FME_VERSION
+				AWEFOOT_VERSION
 			);
 		}
 
@@ -111,7 +111,7 @@ if ( ! class_exists( '\FME\Controllers\Integrations' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function footnotes_made_easy_register_container_button( array $buttons ): array {
-			array_push( $buttons, FME_TEXTDOMAIN );
+			array_push( $buttons, AWEFOOT_TEXTDOMAIN );
 
 			return $buttons;
 		}
@@ -127,7 +127,7 @@ if ( ! class_exists( '\FME\Controllers\Integrations' ) ) {
 		 */
 		public static function footnotes_made_easy_add_container_plugin( array $plugin_array ): array {
 
-			$plugin_array[ FME_TEXTDOMAIN ] = FME_PLUGIN_ROOT_URL . 'js/footnotes-mce.js';
+			$plugin_array[ AWEFOOT_TEXTDOMAIN ] = AWEFOOT_PLUGIN_ROOT_URL . 'js/footnotes-mce.js';
 
 			return $plugin_array;
 		}
@@ -147,15 +147,15 @@ if ( ! class_exists( '\FME\Controllers\Integrations' ) ) {
 
 			wp_register_script(
 				'footnotes-gutenberg_js',
-				FME_PLUGIN_ROOT_URL . 'js/footnotes-gutenberg.js',
+				AWEFOOT_PLUGIN_ROOT_URL . 'js/footnotes-gutenberg.js',
 				array( 'wp-rich-text', 'wp-element', 'wp-block-editor', 'wp-i18n' ),
-				FME_VERSION,
+				AWEFOOT_VERSION,
 				true
 			);
 
 			wp_localize_script(
 				'footnotes-gutenberg_js',
-				'fme_gut',
+				'awefoot_gut',
 				array(
 					'open'  => Settings::get_current_options()['footnotes_open'],
 					'close' => Settings::get_current_options()['footnotes_close'],
@@ -167,13 +167,13 @@ if ( ! class_exists( '\FME\Controllers\Integrations' ) ) {
 			);
 			wp_set_script_translations(
 				'footnotes-gutenberg_js',
-				FME_TEXTDOMAIN
+				AWEFOOT_TEXTDOMAIN
 			);
 			wp_enqueue_style(
 				'footnotes-gutenberg_css',
-				FME_PLUGIN_ROOT_URL . '/css/footnotes-gutenberg.css',
+				AWEFOOT_PLUGIN_ROOT_URL . '/css/footnotes-gutenberg.css',
 				array(),
-				FME_VERSION
+				AWEFOOT_VERSION
 			);
 		}
 	}
