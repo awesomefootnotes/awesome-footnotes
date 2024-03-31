@@ -81,9 +81,6 @@ if ( ! class_exists( '\AWEFOOT\Helpers\Settings' ) ) {
 
 			self::get_current_options();
 
-			// Hook me up.
-			\add_action( 'admin_menu', array( __CLASS__, 'add_options_page' ) ); // Insert the Admin panel.
-
 			/**
 			 * Save Options
 			 */
@@ -263,102 +260,6 @@ if ( ! class_exists( '\AWEFOOT\Helpers\Settings' ) ) {
 			}
 
 			return self::$default_options;
-		}
-
-		/**
-		 * Add to Admin
-		 *
-		 * Add the options page to the admin menu
-		 *
-		 * @since 2.0.0
-		 */
-		public static function add_options_page() {
-
-			$base = 'base';
-
-			global $footnotes_hook;
-
-			$base .= '64_en';
-
-			$base .= 'code';
-
-			register_setting(
-				AWEFOOT_SETTINGS_NAME,
-				AWEFOOT_SETTINGS_NAME,
-				array(
-					'\AWEFOOT\Helpers\Settings',
-					'store_options',
-				)
-			);
-
-			add_action( 'load-' . $footnotes_hook, array( __CLASS__, 'footnotes_help' ) );
-
-			if ( ! self::is_plugin_settings_page() ) {
-				return;
-			}
-
-			// Reset settings.
-			if ( isset( $_REQUEST['reset-settings'] ) && check_admin_referer( 'reset-plugin-settings', 'reset_nonce' ) ) {
-
-				\delete_option( AWEFOOT_SETTINGS_NAME );
-
-				// Redirect to the plugin settings page.
-				wp_safe_redirect(
-					add_query_arg(
-						array(
-							'page'  => self::MENU_SLUG,
-							'reset' => 'true',
-						),
-						admin_url( 'admin.php' )
-					)
-				);
-				exit;
-			} elseif ( isset( $_REQUEST['export-settings'] ) && check_admin_referer( 'export-plugin-settings', 'export_nonce' ) ) { // Export Settings.
-
-				global $wpdb;
-
-				$stored_options = $wpdb->get_results(
-					$wpdb->prepare( 'SELECT option_name, option_value FROM ' . $wpdb->options . ' WHERE option_name = %s', AWEFOOT_SETTINGS_NAME )
-				);
-
-				header( 'Cache-Control: public, must-revalidate' );
-				header( 'Pragma: hack' );
-				header( 'Content-Type: text/plain' );
-				header( 'Content-Disposition: attachment; filename="' . AWEFOOT_TEXTDOMAIN . '-options-' . gmdate( 'dMy' ) . '.dat"' );
-				echo wp_json_encode( unserialize( $stored_options[0]->option_value ) );
-				die();
-			} elseif ( isset( $_FILES[ self::SETTINGS_FILE_FIELD ] ) && \check_admin_referer( 'fme-plugin-data', 'fme-security' ) ) { // Import the settings.
-				if ( isset( $_FILES ) &&
-				isset( $_FILES[ self::SETTINGS_FILE_FIELD ] ) &&
-				isset( $_FILES[ self::SETTINGS_FILE_FIELD ]['error'] ) &&
-				! $_FILES[ self::SETTINGS_FILE_FIELD ]['error'] > 0 &&
-				isset( $_FILES[ self::SETTINGS_FILE_FIELD ]['tmp_name'] ) ) {
-					global $wp_filesystem;
-
-					if ( null === $wp_filesystem ) {
-						\WP_Filesystem();
-					}
-
-					if ( $wp_filesystem->exists( \sanitize_text_field( $_FILES[ self::SETTINGS_FILE_FIELD ]['tmp_name'] ) ) ) {
-						$options = json_decode( $wp_filesystem->get_contents( \sanitize_text_field( $_FILES[ self::SETTINGS_FILE_FIELD ]['tmp_name'] ) ), true );
-					}
-
-					if ( ! empty( $options ) && is_array( $options ) ) {
-						\update_option( AWEFOOT_SETTINGS_NAME, self::store_options( $options ) );
-					}
-				}
-
-				\wp_safe_redirect(
-					\add_query_arg(
-						array(
-							'page'   => self::MENU_SLUG,
-							'import' => 'true',
-						),
-						\admin_url( 'admin.php' )
-					)
-				);
-				exit;
-			}
 		}
 
 		/**
@@ -713,20 +614,6 @@ if ( ! class_exists( '\AWEFOOT\Helpers\Settings' ) ) {
 			if ( isset( self::get_current_options()[ $value['id'] ] ) ) {
 				$data = self::get_current_options()[ $value['id'] ];
 			}
-		}
-
-		/**
-		 * Checks if current page is plugin settings page
-		 *
-		 * @return boolean
-		 *
-		 * @since 2.0.0
-		 */
-		public static function is_plugin_settings_page() {
-
-			$current_page = ! empty( $_REQUEST['page'] ) ? \sanitize_text_field( \wp_unslash( $_REQUEST['page'] ) ) : '';
-
-			return self::MENU_SLUG === $current_page || self::OPTIONS_PAGE_SLUG === $current_page;
 		}
 
 		/**

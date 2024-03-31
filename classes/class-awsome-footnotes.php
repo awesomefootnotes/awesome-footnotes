@@ -37,8 +37,6 @@ if ( ! class_exists( '\AWEFOOT\Awesome_Footnotes' ) ) {
 		public static function init() {
 			if ( \is_admin() ) {
 
-				\add_action( 'admin_init', array( __CLASS__, 'plugin_redirect' ) );
-
 				\add_filter( 'plugin_action_links', array( __CLASS__, 'add_settings_link' ), 10, 2 );
 				\add_filter( 'plugin_row_meta', array( __CLASS__, 'plugin_meta' ), 10, 2 );
 
@@ -102,7 +100,7 @@ if ( ! class_exists( '\AWEFOOT\Awesome_Footnotes' ) ) {
 		 */
 		public static function is_admin_page() {
 
-			return \is_admin() && ( false !== Settings::is_plugin_settings_page() );
+			return false;
 		}
 
 		/**
@@ -189,22 +187,6 @@ if ( ! class_exists( '\AWEFOOT\Awesome_Footnotes' ) ) {
 		 */
 		public static function plugin_activate() {
 			\add_option( self::REDIRECT_OPTION_NAME, true );
-		}
-
-		/**
-		 * Redirects the plugin to its settings page if it was just activated.
-		 *
-		 * @return void
-		 *
-		 * @since 2.4.0
-		 */
-		public static function plugin_redirect() {
-			if ( \get_option( self::REDIRECT_OPTION_NAME, false ) ) {
-				\delete_option( self::REDIRECT_OPTION_NAME );
-				if ( ! isset( $_REQUEST['activate-multi'] ) ) {
-					\wp_safe_redirect( add_query_arg( 'page', Settings::MENU_SLUG, get_admin_url( get_current_blog_id(), 'admin.php' ) ) );
-				}
-			}
 		}
 	}
 }
