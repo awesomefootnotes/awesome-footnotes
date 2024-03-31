@@ -24,14 +24,8 @@ class ComposerStaticInitcfdb79b3161cca532bdaefc1d0b65af6
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'AWEFOOT\\Awesome_Footnotes' => __DIR__ . '/../..' . '/classes/class-awsome-footnotes.php',
         'AWEFOOT\\Controllers\\Footnotes_Formatter' => __DIR__ . '/../..' . '/classes/controllers/class-footnotes-formatter.php',
-        'AWEFOOT\\Controllers\\Integrations' => __DIR__ . '/../..' . '/classes/controllers/class-integrations.php',
-        'AWEFOOT\\Controllers\\Pointers' => __DIR__ . '/../..' . '/classes/controllers/class-pointers.php',
         'AWEFOOT\\Helpers\\Context_Helper' => __DIR__ . '/../..' . '/classes/helpers/class-context-helper.php',
-        'AWEFOOT\\Helpers\\Review_Plugin' => __DIR__ . '/../..' . '/classes/helpers/class-review-plugin.php',
         'AWEFOOT\\Helpers\\Settings' => __DIR__ . '/../..' . '/classes/helpers/class-settings.php',
-        'AWEFOOT\\Helpers\\Upgrade_Notice' => __DIR__ . '/../..' . '/classes/helpers/class-upgrade-notice.php',
-        'AWEFOOT\\Migration\\Abstract_Migration' => __DIR__ . '/../..' . '/classes/migration/class-abstract-migration.php',
-        'AWEFOOT\\Migration\\Migration' => __DIR__ . '/../..' . '/classes/migration/class-migration.php',
      );
 
     public static function getInitializer(ClassLoader $loader)

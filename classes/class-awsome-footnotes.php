@@ -14,12 +14,8 @@ declare(strict_types=1);
 
 namespace AWEFOOT;
 
-use AWEFOOT\Migration\Migration;
 use AWEFOOT\Helpers\Settings;
-use AWEFOOT\Helpers\Review_Plugin;
-use AWEFOOT\Controllers\Integrations;
 use AWEFOOT\Controllers\Footnotes_Formatter;
-use AWEFOOT\Controllers\Pointers;
 use AWEFOOT\Helpers\Context_Helper;
 
 if ( ! class_exists( '\AWEFOOT\Awesome_Footnotes' ) ) {
@@ -40,21 +36,13 @@ if ( ! class_exists( '\AWEFOOT\Awesome_Footnotes' ) ) {
 		 */
 		public static function init() {
 			if ( \is_admin() ) {
-				Migration::migrate();
 
 				\add_action( 'admin_init', array( __CLASS__, 'plugin_redirect' ) );
-
-				\add_action( 'current_screen', array( '\AWEFOOT\Helpers\Upgrade_Notice', 'init' ) );
 
 				\add_filter( 'plugin_action_links', array( __CLASS__, 'add_settings_link' ), 10, 2 );
 				\add_filter( 'plugin_row_meta', array( __CLASS__, 'plugin_meta' ), 10, 2 );
 
-				Review_Plugin::init();
-
-				Integrations::init();
 				Settings::init();
-
-				Pointers::init();
 
 				// Hide all unrelated to the plugin notices on the plugin admin pages.
 				\add_action( 'admin_print_scripts', array( __CLASS__, 'hide_unrelated_notices' ) );

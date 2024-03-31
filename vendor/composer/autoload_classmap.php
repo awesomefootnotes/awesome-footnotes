@@ -9,12 +9,6 @@ return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'AWEFOOT\\Awesome_Footnotes' => $baseDir . '/classes/class-awsome-footnotes.php',
     'AWEFOOT\\Controllers\\Footnotes_Formatter' => $baseDir . '/classes/controllers/class-footnotes-formatter.php',
-    'AWEFOOT\\Controllers\\Integrations' => $baseDir . '/classes/controllers/class-integrations.php',
-    'AWEFOOT\\Controllers\\Pointers' => $baseDir . '/classes/controllers/class-pointers.php',
     'AWEFOOT\\Helpers\\Context_Helper' => $baseDir . '/classes/helpers/class-context-helper.php',
-    'AWEFOOT\\Helpers\\Review_Plugin' => $baseDir . '/classes/helpers/class-review-plugin.php',
     'AWEFOOT\\Helpers\\Settings' => $baseDir . '/classes/helpers/class-settings.php',
-    'AWEFOOT\\Helpers\\Upgrade_Notice' => $baseDir . '/classes/helpers/class-upgrade-notice.php',
-    'AWEFOOT\\Migration\\Abstract_Migration' => $baseDir . '/classes/migration/class-abstract-migration.php',
-    'AWEFOOT\\Migration\\Migration' => $baseDir . '/classes/migration/class-migration.php',
-);
+ );

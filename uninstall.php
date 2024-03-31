@@ -9,7 +9,6 @@
  */
 
 use AWEFOOT\Helpers\Settings;
-use AWEFOOT\Helpers\Review_Plugin;
 
 // If the uninstall was not called by WordPress, exit.
 
@@ -22,4 +21,3 @@ require_once __DIR__ . '/awesome-footnotes.php';
 // Delete any saved data.
 \delete_option( AWEFOOT_SETTINGS_NAME );
 \delete_option( Settings::SETTINGS_VERSION );
-\delete_option( Review_Plugin::REVIEW_OPTION_KEY );
