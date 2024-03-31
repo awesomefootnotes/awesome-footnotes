@@ -141,30 +141,7 @@ if ( ! class_exists( '\AWEFOOT\Helpers\Context_Helper' ) ) {
 		 * @since 1.0.0
 		 */
 		private static function is_rest_request(): bool {
-			if (
-			( defined( 'REST_REQUEST' ) && REST_REQUEST )
-            || ! empty( $_GET['rest_route'] ) // phpcs:ignore
-			) {
-				return true;
-			}
-
-			if ( ! get_option( 'permalink_structure' ) ) {
-				return false;
-			}
-
-			/*
-			 * This is needed because, if called early, global $wp_rewrite is not defined but required
-			 * by get_rest_url(). WP will reuse what we set here, or in worst case will replace, but no
-			 * consequences for us in any case.
-			 */
-			if ( empty( $GLOBALS['wp_rewrite'] ) ) {
-				$GLOBALS['wp_rewrite'] = new \WP_Rewrite(); // phpcs:ignore -- WordPress.WP.GlobalVariablesOverride.Prohibited
-			}
-
-			$current_path = trim( (string) parse_url( (string) add_query_arg( array() ), PHP_URL_PATH ), '/' ) . '/'; // phpcs:ignore WordPress.WP.AlternativeFunctions.parse_url_parse_url
-			$rest_path    = trim( (string) parse_url( (string) get_rest_url(), PHP_URL_PATH ), '/' ) . '/'; // phpcs:ignore WordPress.WP.AlternativeFunctions.parse_url_parse_url
-
-			return strpos( $current_path, $rest_path ) === 0;
+			return false;
 		}
 
 		/**
@@ -189,19 +166,7 @@ if ( ! class_exists( '\AWEFOOT\Helpers\Context_Helper' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function is_page_now( string $page, string $url = '' ): bool {
-			$page_now = (string) ( $GLOBALS['pagenow'] ?? '' );
-			if ( $page_now && ( basename( $page_now ) === $page ) ) {
-				return true;
-			}
-
-			if ( '' === $url ) {
-				$url = \network_site_url( $page );
-			}
-
-			$current_path = (string) parse_url( add_query_arg( array() ), PHP_URL_PATH ); // phpcs:ignore WordPress.WP.AlternativeFunctions.parse_url_parse_url
-			$target_path  = (string) parse_url( $url, PHP_URL_PATH ); // phpcs:ignore WordPress.WP.AlternativeFunctions.parse_url_parse_url
-
-			return trim( $current_path, '/' ) === trim( $target_path, '/' );
+			return false;
 		}
 
 		/**
@@ -214,9 +179,6 @@ if ( ! class_exists( '\AWEFOOT\Helpers\Context_Helper' ) ) {
 		 * @since 1.0.0
 		 */
 		final public static function force( string $context ) {
-			if ( ! \array_key_exists( $context, self::$all ) ) {
-				throw new \LogicException( "'{$context}' is not a valid context." ); // phpcs:ignore -- WordPress.Security.EscapeOutput.ExceptionNotEscaped
-			}
 
 			self::remove_action_hooks();
 
@@ -248,9 +210,6 @@ if ( ! class_exists( '\AWEFOOT\Helpers\Context_Helper' ) ) {
 		 * @since 1.0.0
 		 */
 		final public static function is( string $context ): bool {
-			if ( ! \array_key_exists( $context, self::$all ) ) {
-				throw new \LogicException( "'{$context}' is not a valid context." ); // phpcs:ignore -- WordPress.Security.EscapeOutput.ExceptionNotEscaped
-			}
 
 			if ( is_null( self::$all[ $context ] ) ) {
 

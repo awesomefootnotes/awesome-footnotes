@@ -127,8 +127,6 @@ use AWEFOOT\Controllers\Footnotes_Formatter;
 	?>
 	<ol class="footnotes">
 		<li id="footnote_0_1" class="footnote">
-			<span class="symbol"><?php echo html_entity_decode( Settings::get_current_options()['list_style_symbol'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-
 			<?php
 			$back_link_title = Settings::get_current_options()['back_link_title'];
 
@@ -140,11 +138,8 @@ use AWEFOOT\Controllers\Footnotes_Formatter;
 				}
 			}
 			?>
-
-			<?php esc_html_e( 'First footnote', 'awesome-footnotes' ); ?> <span class="footnote-back-link-wrapper"><?php echo Settings::get_current_options()['pre_backlink']; ?><a href="#" class="footnote-link footnote-back-link" title="<?php echo $back_link_title; ?>" aria-label="<?php echo $back_link_title; ?>" onclick="return false"><?php echo Settings::get_current_options()['backlink']; ?></a><?php echo Settings::get_current_options()['post_backlink']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 		</li>
 		<li id="footnote_1_1" class="footnote">
-			<span class="symbol"><?php echo str_repeat( html_entity_decode( Settings::get_current_options()['list_style_symbol'] ), 2 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 
 
 			<?php
@@ -159,10 +154,8 @@ use AWEFOOT\Controllers\Footnotes_Formatter;
 			}
 			?>
 
-			<?php esc_html_e( 'Second footnote', 'awesome-footnotes' ); ?> <span class="footnote-back-link-wrapper"><?php echo Settings::get_current_options()['pre_backlink']; ?><a href="#" class="footnote-link footnote-back-link" title="<?php echo $back_link_title; ?>" aria-label="<?php echo $back_link_title; ?>" onclick="return false"><?php echo Settings::get_current_options()['backlink']; ?></a><?php echo Settings::get_current_options()['post_backlink']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 		</li>
 		<li id="footnote_2_1" class="footnote">
-			<span class="symbol"><?php echo str_repeat( html_entity_decode( Settings::get_current_options()['list_style_symbol'] ), 3 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 
 
 			<?php
@@ -176,8 +169,6 @@ use AWEFOOT\Controllers\Footnotes_Formatter;
 				}
 			}
 			?>
-
-			<?php esc_html_e( 'Third footnote', 'awesome-footnotes' ); ?> <span class="footnote-back-link-wrapper"><?php echo Settings::get_current_options()['pre_backlink']; ?><a href="#" class="footnote-link footnote-back-link" title="<?php echo $back_link_title; ?>" aria-label="<?php echo $back_link_title; ?>" onclick="return false"><?php echo Settings::get_current_options()['backlink']; ?></a><?php echo Settings::get_current_options()['post_backlink']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 		</li>
 	</ol>
 <?php

@@ -164,8 +164,6 @@ if ( ! class_exists( '\AWEFOOT\Helpers\Review_Plugin' ) ) {
 				'inline',
 				'fme-review-notice',
 			);
-
-			printf( '<div id="%3$s" class="%1$s"><p>%2$s</p></div>', trim( implode( ' ', $class ) ), self::get_message(), self::REVIEW_OPTION_KEY ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		/**

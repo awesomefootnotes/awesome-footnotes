@@ -32,8 +32,7 @@ class ComposerStaticInitcfdb79b3161cca532bdaefc1d0b65af6
         'AWEFOOT\\Helpers\\Upgrade_Notice' => __DIR__ . '/../..' . '/classes/helpers/class-upgrade-notice.php',
         'AWEFOOT\\Migration\\Abstract_Migration' => __DIR__ . '/../..' . '/classes/migration/class-abstract-migration.php',
         'AWEFOOT\\Migration\\Migration' => __DIR__ . '/../..' . '/classes/migration/class-migration.php',
-        'AWEFOOT\\Settings\\Settings_Builder' => __DIR__ . '/../..' . '/classes/settings/class-settings-builder.php',
-    );
+     );
 
     public static function getInitializer(ClassLoader $loader)
     {

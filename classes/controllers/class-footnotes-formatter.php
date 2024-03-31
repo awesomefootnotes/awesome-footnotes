@@ -127,11 +127,6 @@ if ( ! class_exists( '\AWEFOOT\Controllers\Footnotes_Formatter' ) ) {
 
 			if ( ! $atts['post_id'] && ! $post ) {
 				return '';
-			} elseif ( ! $atts['post_id'] ) {
-
-				echo self::get_footnotes_markup( $post ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			} else {
-				echo self::get_footnotes_markup( \get_post( (int) $atts['post_id'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		}
 
@@ -167,7 +162,7 @@ if ( ! class_exists( '\AWEFOOT\Controllers\Footnotes_Formatter' ) ) {
 				ol.footnotes>li>span.symbol {display: none;}
 			<?php } else { ?>
 				ol.footnotes>li {list-style-type:none};
-			<?php } echo Settings::get_current_options()['css_footnotes']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php } ?>
 			</style>
 			<?php
 		}
@@ -477,13 +472,6 @@ if ( ! class_exists( '\AWEFOOT\Controllers\Footnotes_Formatter' ) ) {
 			$footnotes_markup = '';
 			$start            = ( 1 !== $start_number ) ? 'start="' . $start_number . '" ' : '';
 
-			if ( ! empty( $footnotes_header = Settings::get_current_options()['pre_footnotes'] ) ) { // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure
-				$footnotes_header =
-					'<div class="awesome-footnotes-header">' .
-					$footnotes_header .
-					'</div>';
-			}
-
 			/**
 			 * Gives the ability to change the footnotes header to something else
 			 *
@@ -528,13 +516,6 @@ if ( ! class_exists( '\AWEFOOT\Controllers\Footnotes_Formatter' ) ) {
 				$footnotes_markup .= '</li>';
 			}
 			$footnotes_markup .= '</ol>';
-
-			if ( ! empty( $footnotes_footer = Settings::get_current_options()['post_footnotes'] ) ) { // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure, Generic.CodeAnalysis.AssignmentInCondition.Found
-				$footnotes_footer =
-					'<div class="awesome-footnotes-footer">' .
-					$footnotes_footer .
-					'</div>';
-			}
 
 			/**
 			 * Gives the ability to change the footnotes header to something else
@@ -601,15 +582,7 @@ if ( ! class_exists( '\AWEFOOT\Controllers\Footnotes_Formatter' ) ) {
 
 				if ( ! empty( $raw_notes ) && \is_array( $raw_notes ) ) {
 					foreach ( $raw_notes as $note ) {
-						if ( $position = \mb_strpos( $note, Settings::get_current_options()['footnotes_close'] ) ) { // phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition.Found, Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure
-							$notes[ $pos ]['raw_text']          = \mb_substr( $note, 0, $position );
-							$notes[ $pos ]['original_position'] = $pos;
-							$notes[ $pos ]['original_text']     = Settings::get_current_options()['footnotes_open'] . $notes[ $pos ]['raw_text'] . Settings::get_current_options()['footnotes_close'];
-
-							$data = self::replace_identifiers( $data, $notes[ $pos ]['original_text'], $pos );
-
-							++$pos;
-						}
+						
 					}
 				}
 				self::$identifiers[ $post_id ] = $notes;

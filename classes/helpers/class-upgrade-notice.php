@@ -71,12 +71,6 @@ if ( ! class_exists( '\AWEFOOT\Helpers\Upgrade_Notice' ) ) {
 
 			$upgrade_notice = self::get_upgrade_notice( $response->new_version );
 
-			if ( isset( $upgrade_notice ) && ! empty( $upgrade_notice ) ) {
-				printf(
-					'</p><div class="update-message">%s</div><p class="dummy">',
-					$upgrade_notice // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				);
-			}
 		}
 
 		/**

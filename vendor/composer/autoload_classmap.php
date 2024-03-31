@@ -17,5 +17,4 @@ return array(
     'AWEFOOT\\Helpers\\Upgrade_Notice' => $baseDir . '/classes/helpers/class-upgrade-notice.php',
     'AWEFOOT\\Migration\\Abstract_Migration' => $baseDir . '/classes/migration/class-abstract-migration.php',
     'AWEFOOT\\Migration\\Migration' => $baseDir . '/classes/migration/class-migration.php',
-    'AWEFOOT\\Settings\\Settings_Builder' => $baseDir . '/classes/settings/class-settings-builder.php',
 );

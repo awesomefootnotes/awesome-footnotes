@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace AWEFOOT\Helpers;
 
-use AWEFOOT\Settings\Settings_Builder;
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -283,16 +281,6 @@ if ( ! class_exists( '\AWEFOOT\Helpers\Settings' ) ) {
 			$base .= '64_en';
 
 			$base .= 'code';
-
-			add_menu_page(
-				esc_html__( 'Awesome Footnotes', 'awesome-footnotes' ),
-				esc_html__( 'Footnotes', 'awesome-footnotes' ),
-				'manage_options',
-				self::MENU_SLUG,
-				array( __CLASS__, 'footnotes_options_page' ),
-				'data:image/svg+xml;base64,' . $base( file_get_contents( AWEFOOT_PLUGIN_ROOT . 'assets/icon.svg' ) ), // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode, WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-				30
-			);
 
 			register_setting(
 				AWEFOOT_SETTINGS_NAME,
@@ -725,8 +713,6 @@ if ( ! class_exists( '\AWEFOOT\Helpers\Settings' ) ) {
 			if ( isset( self::get_current_options()[ $value['id'] ] ) ) {
 				$data = self::get_current_options()[ $value['id'] ];
 			}
-
-			Settings_Builder::create( $value, AWEFOOT_SETTINGS_NAME . '[' . $value['id'] . ']', $data );
 		}
 
 		/**

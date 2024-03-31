@@ -59,10 +59,7 @@ if ( ! class_exists( '\AWEFOOT\Controllers\Integrations' ) ) {
 			?>
 			<!-- TinyMCE Shortcode Plugin -->
 			<script>
-			var awefoot_gut = {
-				'open' : '<?php echo Settings::get_current_options()['footnotes_open']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>',
-				'close' : '<?php echo Settings::get_current_options()['footnotes_close']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>',
-			};
+			
 			</script>
 			<!-- TinyMCE Shortcode Plugin -->
 			<?php
